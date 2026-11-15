@@ -129,52 +129,6 @@ function yearGroups(items, opts = {}, desc = true) {
   }).join("");
 }
 
-/* ---------- hero scene (original SVG) ---------- */
-function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
-function palm(x, y, s, f = 1) {
-  const fr = [[-70, -20], [-55, -45], [-20, -60], [25, -58], [60, -40], [75, -12], [40, -10], [-40, -8]];
-  return `<g transform="translate(${x} ${y}) scale(${s * f} ${s})" stroke="var(--hill-1)" fill="none" stroke-linecap="round">
-    <path d="M0 0 Q-8 70 4 150" stroke-width="9"/><g stroke-width="7">${fr.map(([dx, dy]) => `<path d="M0 0 Q${dx * .55} ${dy - 22} ${dx} ${dy + 18}"/>`).join("")}</g></g>`;
-}
-function scene() {
-  const r = rnd(7), stars = [];
-  for (let i = 0; i < 130; i++) {
-    const x = r() * 1600, y = r() * 430, rad = r() * 1.5 + .4;
-    stars.push(`<circle class="twinkle" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${rad.toFixed(2)}" fill="#fff" style="--d:${(2 + r() * 4).toFixed(1)}s;--t:-${(r() * 4).toFixed(1)}s;opacity:${(.3 + r() * .7).toFixed(2)}"/>`);
-  }
-  const win = (x, y, w, h) => `<path d="M${x} ${y}v-${h - w / 2}a${w / 2} ${w / 2} 0 0 1 ${w} 0v${h - w / 2}z"/>`;
-  const shelves = (x, y, w, h) => { let o = ""; for (let k = 3; k < w - 2; k += 4) o += `<rect x="${x + k}" y="${y - h * .45}" width="2.2" height="${h * .4}"/>`; return o; };
-  const xs = [668, 706, 744, 836, 874, 912];
-  return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky-a)"/><stop offset=".45" style="stop-color:var(--sky-b)"/><stop offset=".72" style="stop-color:var(--sky-c)"/><stop offset=".95" style="stop-color:var(--sky-d)"/></linearGradient>
-    <radialGradient id="sglow"><stop offset="0" stop-color="#FFF6DA" stop-opacity=".8"/><stop offset="1" stop-color="#FFF6DA" stop-opacity="0"/></radialGradient>
-    <radialGradient id="mglow"><stop offset="0" stop-color="#FFE9B8" stop-opacity=".5"/><stop offset="1" stop-color="#FFE9B8" stop-opacity="0"/></radialGradient>
-    <radialGradient id="spill"><stop offset="0" stop-color="#FFC560" stop-opacity=".45"/><stop offset="1" stop-color="#FFC560" stop-opacity="0"/></radialGradient>
-    <mask id="cres"><circle cx="1220" cy="180" r="56" fill="#fff"/><circle cx="1244" cy="164" r="50" fill="#000"/></mask>
-    <filter id="wglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  </defs>
-  <rect width="1600" height="900" fill="url(#sky)"/>
-  <g class="layer" data-depth=".05"><g class="night">${stars.join("")}<circle cx="1220" cy="180" r="170" fill="url(#mglow)"/><circle cx="1220" cy="180" r="56" fill="var(--moon)" mask="url(#cres)"/></g><g class="day"><circle cx="1220" cy="190" r="150" fill="url(#sglow)"/><circle cx="1220" cy="190" r="58" fill="#FFF4D2"/></g></g>
-  <g class="layer" data-depth=".12"><path fill="var(--hill-3)" d="M0 610C180 560 330 575 500 540S820 470 980 520 1290 455 1450 500 1600 480 1600 480V900H0Z"/></g>
-  <g class="layer" data-depth=".22">
-    <ellipse cx="800" cy="640" rx="420" ry="90" fill="url(#spill)"/>
-    <path fill="var(--hill-2)" d="M0 700C230 640 470 655 640 628H960C1140 610 1350 655 1600 615V900H0Z"/>
-    <g fill="var(--hill-2)"><rect x="616" y="466" width="40" height="166" rx="3"/><path d="M612 468h48l-24-34z"/><rect x="944" y="466" width="40" height="166" rx="3"/><path d="M940 468h48l-24-34z"/>
-      <rect x="650" y="520" width="300" height="112"/><rect x="716" y="458" width="168" height="64"/><path d="M724 460Q800 350 876 460Z"/><rect x="798" y="352" width="4" height="34"/><circle cx="800" cy="350" r="6"/></g>
-    <g fill="var(--win)" filter="url(#wglow)">${xs.map(x => win(x, 592, 22, 46)).join("")}${[742, 789, 836].map(x => win(x, 498, 22, 34)).join("")}${win(782, 632, 36, 70)}</g>
-    <g fill="rgba(80,40,10,.35)">${xs.map(x => shelves(x, 592, 22, 46)).join("")}</g>
-  </g>
-  <g class="layer" data-depth=".34">${palm(250, 655, 1.15)}${palm(330, 680, .85, -1)}${palm(1330, 640, 1.2, -1)}${palm(1420, 672, .8)}
-    <path fill="var(--hill-1)" d="M0 785C280 720 560 760 860 742S1330 712 1600 752V900H0Z"/></g>
-</svg>`;
-}
-function motes(n = 26) {
-  const r = rnd(42); let o = "";
-  for (let i = 0; i < n; i++) o += `<i style="--x:${(r() * 100).toFixed(1)}%;--w:${(3 + r() * 6).toFixed(1)}px;--d:${(10 + r() * 10).toFixed(1)}s;--t:-${(r() * 18).toFixed(1)}s;--sx:${(r() * 60 - 30).toFixed(0)}px;--o:${(.35 + r() * .55).toFixed(2)}"></i>`;
-  return o;
-}
-
 /* ---------- view plumbing ---------- */
 let cleanups = [];
 const onCleanup = f => cleanups.push(f);
@@ -193,61 +147,43 @@ function viewHome() {
   const ups = (S.upcoming || []).map(u => {
     const d = parseDate(u.date), e = parseDate(u.end), days = d ? Math.ceil((d - Date.now()) / 864e5) : null;
     return `<a class="ucard" href="${esc(u.href || "#/")}"><span class="u-date">${d ? `<b>${fGd.format(d)}</b><span>${fGm.format(d)}</span>` : ""}</span>
-      <span class="u-body"><span class="badge">قادم</span><span class="u-pre">${esc(u.pre || "")}</span><span class="u-t">${esc(u.title)}</span>
+      <span class="u-body"><span class="u-pre">${esc(u.pre || "")}</span><span class="u-t">${esc(u.title)}</span>
       ${u.place ? `<span class="u-m">${ico("pin")}${esc(u.place)}</span>` : ""}${d ? `<span class="u-m">${ico("cal")}${fG.format(d)}${e ? " – " + fG.format(e) : ""}</span>` : ""}
-      ${days != null && days >= 0 ? `<span class="u-c">خلال ${arN(days)} يومًا</span>` : ""}</span></a>`;
+      ${days != null && days >= 0 ? `<span class="u-c">بعد ${arN(days)} يومًا</span>` : ""}</span></a>`;
   }).join("");
   const topBooks = [...BOOKS].sort((a, b) => b.lessons.length - a.lessons.length).slice(0, 6);
   const cv = S.cv || [];
   V(`
-  <section class="hero" id="hero">
-    <div class="hero-art">${scene()}</div><div class="motes" aria-hidden="true">${motes()}</div><div class="hero-shade" aria-hidden="true"></div>
-    <div class="wrap mast">
-      ${p.eyebrow ? `<span class="eyebrow">${esc(p.eyebrow)}</span>` : ""}
-      <h1 class="m-name">${p.pre ? `<small>${esc(p.pre)}</small>` : ""}<em>${esc(p.name || "")}</em></h1>
-      ${p.cred ? `<p class="m-cred">${ico("cap")}<span>${esc(p.cred)}</span></p>` : ""}
-      ${p.role ? `<p class="m-role">${esc(p.role)}</p>` : ""}
-      ${p.lede ? `<p class="m-lede">${esc(p.lede)}</p>` : ""}
-      <form class="m-search" id="home-search" role="search">
-        <label class="field"><span class="sr">ابحث في المكتبة</span>${ico("search")}<input id="home-q" type="search" autocomplete="off" enterkeyhint="search" placeholder="ابحث عن درس أو كتاب أو خطبة…"></label>
-        <button type="submit">ابحث</button>
-      </form>
-    </div>
-    <div class="cue" aria-hidden="true"><span>مرّر</span>${ico("down")}</div>
-  </section>
-  <div class="wrap float">
-    <div class="pane">
-      ${S.notice ? `<a class="m-alert" href="${esc(S.notice.href || "#/")}">${ico("bell")}<span>${esc(S.notice.text)}</span>${ico("arrow", "i end")}</a>` : ""}
-      <ul class="m-stats">${stats.map(([n, l]) => `<li><b>${arN(n)}</b><span>${l}</span></li>`).join("")}</ul>
-      ${quick.length ? `<nav class="m-quick" aria-label="أكثر الكتب مجالس">${quick.map(b => `<a href="#/book/${esc(b.id)}">${esc(b.title)}</a>`).join("")}</nav>` : ""}
-    </div>
-    ${ups ? `<div class="pane"><div class="sec-h"><h2>قادم</h2><p>دورات ومحاضرات قادمة</p></div><div class="ups">${ups}</div></div>` : ""}
-  </div>
+  <section class="hero"><div class="wrap">
+    ${p.pre ? `<p class="m-pre">${esc(p.pre)}</p>` : ""}
+    <h1 class="m-name">${esc(p.name || "")}</h1>
+    ${p.cred ? `<p class="m-cred">${esc(p.cred)}</p>` : ""}
+    ${p.role ? `<p class="m-role">${esc(p.role)}</p>` : ""}
+    ${p.lede ? `<p class="m-lede">${esc(p.lede)}</p>` : ""}
+    <form class="m-search" id="home-search" role="search">
+      <label class="field"><span class="sr">ابحث في المكتبة</span>${ico("search")}<input id="home-q" type="search" autocomplete="off" enterkeyhint="search" placeholder="ابحث عن درس أو كتاب أو خطبة…"></label>
+      <button type="submit">ابحث</button>
+    </form>
+    <ul class="m-stats">${stats.map(([n, l]) => `<li><b>${arN(n)}</b><span>${l}</span></li>`).join("")}</ul>
+  </div></section>
   <div class="sheet"><div class="wrap">
+    ${S.notice ? `<a class="m-alert" href="${esc(S.notice.href || "#/")}">${ico("bell")}<span>${esc(S.notice.text)}</span>${ico("arrow", "i end")}</a>` : ""}
     <div class="split">
       <section class="sec"><div class="sec-h"><h2>أحدث التسجيلات</h2><a class="more" href="#/archive">الأرشيف كاملًا${ico("arrow")}</a></div>
         <ol class="rows">${ALL.slice(0, 7).map(it => row(it)).join("")}</ol></section>
-      <section class="sec"><div class="sec-h"><h2>أحدث الدورات</h2><a class="more" href="#/courses">كل الدورات${ico("arrow")}</a></div>
-        <div class="dgrid">${COURSES.slice(0, 3).map(ccard).join("")}</div></section>
+      <div>
+        ${ups ? `<section class="sec"><div class="sec-h"><h2>قادم</h2></div><div class="ups">${ups}</div></section>` : ""}
+        <section class="sec"><div class="sec-h"><h2>أحدث الدورات</h2><a class="more" href="#/courses">الكل${ico("arrow")}</a></div>
+          <div class="dgrid">${COURSES.slice(0, 3).map(ccard).join("")}</div></section>
+      </div>
     </div>
     <section class="sec"><div class="sec-h"><h2>الكتب والشروح</h2><p>أكثر الكتب مجالس</p><a class="more" href="#/books">كل الكتب${ico("arrow")}</a></div>
-      <div class="bgrid">${topBooks.map(bcard).join("")}</div></section>
+      <div class="bgrid">${topBooks.map(bcard).join("")}</div>
+      ${quick.length ? `<nav class="m-quick" style="margin-top:18px" aria-label="روابط سريعة">${quick.map(b => `<a href="#/book/${esc(b.id)}">${esc(b.title)}</a>`).join("")}</nav>` : ""}</section>
   </div></div>
   ${cv.length ? cvSection(cv) : ""}`);
   $("#home-search").addEventListener("submit", e => { e.preventDefault(); location.hash = "#/search?q=" + encodeURIComponent($("#home-q").value.trim()); });
-  heroParallax();
   if (cv.length) bootCV();
-}
-function heroParallax() {
-  const layers = $$(".hero-art .layer"), hero = $("#hero");
-  if (reduced || !layers.length) return;
-  let px = 0, raf = 0;
-  const apply = () => { raf = 0; const y = scrollY; if (y > hero.offsetHeight) return; layers.forEach(l => { const d = +l.dataset.depth; l.style.transform = `translate(${(px * d * 40).toFixed(1)}px, ${(y * d * .9).toFixed(1)}px)`; }); };
-  const q = () => raf ||= requestAnimationFrame(apply);
-  const mv = e => { px = (e.clientX / innerWidth - .5) * -1; q(); };
-  addEventListener("scroll", q, { passive: true }); addEventListener("pointermove", mv, { passive: true });
-  onCleanup(() => { removeEventListener("scroll", q); removeEventListener("pointermove", mv); cancelAnimationFrame(raf); });
-  apply();
 }
 
 /* ---------- CV (3D) ---------- */
@@ -256,7 +192,7 @@ function cvSection(cv) {
   return `<section class="cv" id="cv" style="height:${Math.round(n * 42 + 40)}svh" aria-labelledby="cv-title">
     <div class="cv-pin">
       <canvas aria-hidden="true"></canvas>
-      <div class="cv-head"><span class="eyebrow">محطات من الطريق</span><h2 id="cv-title">السيرة الذاتية</h2></div>
+      <div class="cv-head"><h2 id="cv-title">السيرة الذاتية</h2></div>
       <div class="cv-panel" aria-live="polite"><div class="in"><div class="y">${esc(e.year)}</div><h3>${esc(e.title)}</h3><div class="pl"${e.place ? "" : " hidden"}>${ico("pin")}<span>${esc(e.place || "")}</span></div><p>${esc(e.text || "")}</p></div></div>
       <ol class="cv-rail" aria-label="محطات السيرة">${cv.map((x, i) => `<li><button type="button" data-go="${i}" aria-current="${i === 0}" aria-label="${esc(x.year + " — " + x.title)}"><span class="yr">${esc(x.year)}</span></button></li>`).join("")}</ol>
       <div class="cv-count" aria-hidden="true"><span><b id="cv-n">١</b> / ${arN(n)}</span><span class="cv-bar"><i id="cv-bar"></i></span><span>مرّر للأسفل</span></div>
@@ -265,7 +201,7 @@ function cvSection(cv) {
 }
 function cvFallback(root, cv) {
   root.classList.add("static"); root.style.height = "auto";
-  $(".cv-pin", root).innerHTML = `<div class="wrap"><div class="cv-head" style="position:static;background:none;padding-top:80px"><span class="eyebrow">محطات من الطريق</span><h2>السيرة الذاتية</h2></div>
+  $(".cv-pin", root).innerHTML = `<div class="wrap"><div class="cv-head" style="position:static;padding-top:40px"><h2>السيرة الذاتية</h2></div>
    <ol class="cv-fallback">${cv.map(e => `<li><b>${esc(e.year)}</b><h3>${esc(e.title)}</h3>${e.place ? `<p>${esc(e.place)}</p>` : ""}<p>${esc(e.text || "")}</p></li>`).join("")}</ol></div>`;
 }
 function bootCV() {
@@ -416,7 +352,7 @@ function viewLesson(id) {
 /* ---------- blog ---------- */
 function viewBlog() {
   V(`${pageHead("المدونة", "مقالات وفوائد مكتوبة.")}
-  <div class="wrap page">${POSTS.length ? `<div class="posts">${POSTS.map(p => `<a class="post" href="#/post/${esc(p.id)}"><span class="eyebrow">${p._d ? fG.format(p._d) : ""}</span><h3>${esc(p.title)}</h3><p>${esc((p.body || [])[0] || "")}</p></a>`).join("")}</div>` : `<div class="empty">لا مقالات بعد</div>`}</div>`);
+  <div class="wrap page">${POSTS.length ? `<div class="posts">${POSTS.map(p => `<a class="post" href="#/post/${esc(p.id)}"><span class="date">${p._d ? fG.format(p._d) : ""}</span><h3>${esc(p.title)}</h3><p>${esc((p.body || [])[0] || "")}</p></a>`).join("")}</div>` : `<div class="empty">لا مقالات بعد</div>`}</div>`);
 }
 function viewPost(id) {
   const p = POSTS.find(x => x.id === id); if (!p) return viewNotFound();
@@ -473,18 +409,12 @@ function viewNotFound() { V(`${pageHead("الصفحة غير موجودة", "ر�
 const NAV = [["#/", "الرئيسية", "home"], ["#/books", "الكتب", "books"], ["#/courses", "الدورات", "courses"], ["#/khutab", "الخطب", "khutab"], ["#/lectures", "المحاضرات", "lectures"], ["#/clips", "المقاطع", "clips"], ["#/archive", "الأرشيف", "archive"], ["#/blog", "المدونة", "blog"], ["#/more", "المزيد", "more"]];
 const NAV_OF = { book: "books", course: "courses", post: "blog", about: "more", search: "" };
 function chrome() {
-  $("#brand").innerHTML = `<span class="logo">${ico("book")}</span><span>${esc(S.short || S.brand || "")}</span>`;
+  $("#brand").innerHTML = `<span>${esc(S.short || S.brand || "")}</span>`;
   $("#tnav").innerHTML = NAV.map(([h, t, k]) => `<a href="${h}" data-k="${k}">${t}</a>`).join("");
   $$("[data-ico]").forEach(el => el.innerHTML = ico(el.dataset.ico));
-  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/"><span class="logo">${ico("book")}</span><span>${esc(S.brand || "")}</span></a><span>${esc(S.footer || "")}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
-  const tb = $("#theme-btn");
-  const cur = () => document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-  const paint = () => { const d = cur() === "dark"; tb.innerHTML = ico(d ? "sun" : "moon") + `<span>${d ? "نهاري" : "ليلي"}</span>`; tb.title = tb.ariaLabel = d ? "التبديل إلى الوضع النهاري" : "التبديل إلى الوضع الليلي"; };
-  tb.addEventListener("click", () => { store.theme = cur() === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", store.theme); save(); paint(); document.dispatchEvent(new Event("themechange")); });
-  paint();
+  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/">${esc(S.brand || "")}</a><span>${esc(S.footer || "")}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
   const top = $("#top"), mb = $("#menu-btn");
   mb.addEventListener("click", () => { const o = top.classList.toggle("nav-open"); mb.setAttribute("aria-expanded", o); });
-  addEventListener("scroll", () => top.classList.toggle("solid", scrollY > 40 || !top.classList.contains("over")), { passive: true });
   document.addEventListener("click", e => {
     const b = e.target.closest("[data-heard]"); if (!b) return;
     const id = b.dataset.heard, on = !store.heard[id];
@@ -502,8 +432,6 @@ function route() {
   const parts = path.split("/").filter(Boolean).map(decodeURIComponent);
   const key = parts[0] || "home", arg = parts[1] || "";
   const top = $("#top");
-  top.classList.toggle("over", key === "home");
-  top.classList.toggle("solid", key !== "home" || scrollY > 40);
   top.classList.remove("nav-open");
   const navKey = NAV_OF[key] ?? key;
   $$("#tnav a").forEach(a => a.dataset.k === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));

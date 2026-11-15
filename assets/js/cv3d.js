@@ -56,8 +56,7 @@ void main(){ float d = vA - uActive; float f = exp(-(d*d) / 1.6); gl_FragColor =
 /* ---------- theme colours (from CSS variables) ---------- */
 function themeColors() {
   const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
-  const light = document.documentElement.getAttribute("data-theme") === "light";
-  return { light, acc: v("--acc") || "#E3B341", bg: v("--bg") || "#070708", card: light ? "#E9E8E4" : "#1A1A1E", ink: v("--ink") || "#fff", mute: v("--mute") || "#888" };
+  return { light: true, acc: v("--acc") || "#2E5E4E", bg: v("--paper") || "#F2ECE1", card: v("--sunk") || "#E8E0D2", ink: v("--ink") || "#2B2520", mute: v("--mute") || "#7A6F64" };
 }
 
 /* ---------- canvas helpers ---------- */
@@ -82,8 +81,8 @@ function paintCard(c, e, img, T) {
     g.beginPath(); g.moveTo(cx - s + 8, cy + s * .55); g.lineTo(cx - s * .25, cy - s * .1); g.lineTo(cx + s * .2, cy + s * .3); g.lineTo(cx + s * .5, cy + s * .05); g.lineTo(cx + s - 8, cy + s * .5); g.stroke();
     g.globalAlpha = 1;
     g.direction = "rtl"; g.textAlign = "center"; g.textBaseline = "middle";
-    let fs = 50; g.font = `600 ${fs}px "Readex Pro"`;
-    while (g.measureText(e.title || "").width > cw * .82 && fs > 30) { fs -= 3; g.font = `600 ${fs}px "Readex Pro"`; }
+    let fs = 56; g.font = `700 ${fs}px "Amiri"`;
+    while (g.measureText(e.title || "").width > cw * .82 && fs > 30) { fs -= 3; g.font = `700 ${fs}px "Amiri"`; }
     g.fillStyle = T.ink; g.fillText(e.title || "", cx, ch * .78);
   }
   g.restore();
@@ -92,7 +91,7 @@ function paintCard(c, e, img, T) {
 function paintYear(c, text, T) {
   const g = c.getContext("2d"); g.clearRect(0, 0, c.width, c.height);
   g.direction = "rtl"; g.textAlign = "center"; g.textBaseline = "middle";
-  g.font = '700 96px "Readex Pro"'; g.fillStyle = T.acc; g.fillText(text, c.width / 2, c.height / 2 + 6);
+  g.font = '700 92px "Rubik"'; g.fillStyle = T.acc; g.fillText(text, c.width / 2, c.height / 2 + 6);
 }
 
 /* ---------- main ---------- */
@@ -105,7 +104,7 @@ export async function mountCV(root, entries, { reduced = false } = {}) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  try { await Promise.all([document.fonts.load('700 96px "Readex Pro"', "١٤٣٠ هـ"), document.fonts.load('600 50px "Readex Pro"', "المولد")]); } catch {}
+  try { await Promise.all([document.fonts.load('700 96px "Rubik"', "١٤٣٠ هـ"), document.fonts.load('700 50px "Amiri"', "المولد")]); } catch {}
 
   let T = themeColors();
   const scene = new THREE.Scene();
@@ -146,7 +145,7 @@ export async function mountCV(root, entries, { reduced = false } = {}) {
     if (e.img) { const im = new Image(); im.onload = () => { img = im; repaint(); }; im.src = e.img; }
     const mat = new THREE.ShaderMaterial({
       vertexShader: VERT, fragmentShader: FRAG, transparent: true, side: THREE.DoubleSide,
-      uniforms: { uMap: { value: tex }, uPeel: { value: 0 }, uR: { value: 0.15 }, uCorner: { value: new THREE.Vector2(-W / 2, -H / 2) }, uDir: { value: dirUp.clone() }, uVel: { value: 0 }, uAlpha: { value: 1 }, uDim: { value: 0 }, uBack: { value: new THREE.Color(backCol()) }, uFade: { value: new THREE.Color(T.bg) } }
+      uniforms: { uMap: { value: tex }, uPeel: { value: 0 }, uR: { value: 0.15 }, uCorner: { value: new THREE.Vector2(-W / 2, -H / 2) }, uDir: { value: dirUp.clone() }, uVel: { value: 0 }, uAlpha: { value: 1 }, uDim: { value: 0 }, uBack: { value: new THREE.Color("#E3D9C7") }, uFade: { value: new THREE.Color(T.bg) } }
     });
     const card = new THREE.Mesh(geo, mat);
     card.position.set(CARD_X, 0.22, 0.02);

@@ -34,12 +34,12 @@ window.SITE = {
 
   /* تصنيفات الكتب (اللون للغلاف) */
   categories: [
-    { id: "aqeedah", title: "العقيدة",          color: "#1E4A78", desc: "متون الاعتقاد وشروحها" },
-    { id: "manhaj",  title: "المنهج",           color: "#5E4A1C", desc: "" },
-    { id: "hadith",  title: "الحديث",           color: "#6E2630", desc: "كتب السنة وشروحها" },
-    { id: "fiqh",    title: "الفقه",            color: "#24533A", desc: "" },
-    { id: "tafsir",  title: "التفسير",          color: "#4B2E6E", desc: "" },
-    { id: "adab",    title: "الآداب والرقائق",  color: "#21535E", desc: "" }
+    { id: "aqeedah", title: "العقيدة",          color: "#1E3F72", desc: "متون الاعتقاد وشروحها" },
+    { id: "manhaj",  title: "المنهج",           color: "#1B5458", desc: "" },
+    { id: "hadith",  title: "الحديث",           color: "#6A2433", desc: "كتب السنة وشروحها" },
+    { id: "fiqh",    title: "الفقه",            color: "#555423", desc: "" },
+    { id: "tafsir",  title: "التفسير",          color: "#214F39", desc: "" },
+    { id: "adab",    title: "الآداب والرقائق",  color: "#74401E", desc: "" }
   ],
 
   /* الكتب والشروح: كل كتاب له مجالس */
