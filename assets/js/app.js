@@ -148,13 +148,14 @@ function scene() {
   return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky-a)"/><stop offset=".45" style="stop-color:var(--sky-b)"/><stop offset=".72" style="stop-color:var(--sky-c)"/><stop offset=".95" style="stop-color:var(--sky-d)"/></linearGradient>
+    <radialGradient id="sglow"><stop offset="0" stop-color="#FFF6DA" stop-opacity=".8"/><stop offset="1" stop-color="#FFF6DA" stop-opacity="0"/></radialGradient>
     <radialGradient id="mglow"><stop offset="0" stop-color="#FFE9B8" stop-opacity=".5"/><stop offset="1" stop-color="#FFE9B8" stop-opacity="0"/></radialGradient>
     <radialGradient id="spill"><stop offset="0" stop-color="#FFC560" stop-opacity=".45"/><stop offset="1" stop-color="#FFC560" stop-opacity="0"/></radialGradient>
     <mask id="cres"><circle cx="1220" cy="180" r="56" fill="#fff"/><circle cx="1244" cy="164" r="50" fill="#000"/></mask>
     <filter id="wglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1600" height="900" fill="url(#sky)"/>
-  <g class="layer" data-depth=".05">${stars.join("")}<circle cx="1220" cy="180" r="170" fill="url(#mglow)"/><circle cx="1220" cy="180" r="56" fill="var(--moon)" mask="url(#cres)"/></g>
+  <g class="layer" data-depth=".05"><g class="night">${stars.join("")}<circle cx="1220" cy="180" r="170" fill="url(#mglow)"/><circle cx="1220" cy="180" r="56" fill="var(--moon)" mask="url(#cres)"/></g><g class="day"><circle cx="1220" cy="190" r="150" fill="url(#sglow)"/><circle cx="1220" cy="190" r="58" fill="#FFF4D2"/></g></g>
   <g class="layer" data-depth=".12"><path fill="var(--hill-3)" d="M0 610C180 560 330 575 500 540S820 470 980 520 1290 455 1450 500 1600 480 1600 480V900H0Z"/></g>
   <g class="layer" data-depth=".22">
     <ellipse cx="800" cy="640" rx="420" ry="90" fill="url(#spill)"/>
@@ -252,7 +253,7 @@ function heroParallax() {
 /* ---------- CV (3D) ---------- */
 function cvSection(cv) {
   const n = cv.length, e = cv[0];
-  return `<section class="cv" id="cv" style="height:${Math.round(n * 75 + 60)}svh" aria-labelledby="cv-title">
+  return `<section class="cv" id="cv" style="height:${Math.round(n * 42 + 40)}svh" aria-labelledby="cv-title">
     <div class="cv-pin">
       <canvas aria-hidden="true"></canvas>
       <div class="cv-head"><span class="eyebrow">محطات من الطريق</span><h2 id="cv-title">السيرة الذاتية</h2></div>
@@ -478,8 +479,8 @@ function chrome() {
   $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/"><span class="logo">${ico("book")}</span><span>${esc(S.brand || "")}</span></a><span>${esc(S.footer || "")}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
   const tb = $("#theme-btn");
   const cur = () => document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-  const paint = () => { tb.innerHTML = ico(cur() === "dark" ? "sun" : "moon"); tb.title = tb.ariaLabel = cur() === "dark" ? "الوضع الفاتح" : "الوضع الداكن"; };
-  tb.addEventListener("click", () => { store.theme = cur() === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", store.theme); save(); paint(); });
+  const paint = () => { const d = cur() === "dark"; tb.innerHTML = ico(d ? "sun" : "moon") + `<span>${d ? "نهاري" : "ليلي"}</span>`; tb.title = tb.ariaLabel = d ? "التبديل إلى الوضع النهاري" : "التبديل إلى الوضع الليلي"; };
+  tb.addEventListener("click", () => { store.theme = cur() === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", store.theme); save(); paint(); document.dispatchEvent(new Event("themechange")); });
   paint();
   const top = $("#top"), mb = $("#menu-btn");
   mb.addEventListener("click", () => { const o = top.classList.toggle("nav-open"); mb.setAttribute("aria-expanded", o); });
