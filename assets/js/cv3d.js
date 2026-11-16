@@ -49,7 +49,7 @@ void main(){
 }`;
 const LINE_FRAG = /* glsl */`
 uniform vec3 uColor; uniform float uActive; varying float vA;
-void main(){ float d = vA - uActive; float f = exp(-(d*d) / 1.6); gl_FragColor = vec4(uColor, 0.15 + 0.85 * f);
+void main(){ float d = mod(vA - uActive + 3.14159265, 6.2831853) - 3.14159265; /* shortest angle, no seam */ float f = exp(-(d*d) / 1.6); gl_FragColor = vec4(uColor, 0.15 + 0.85 * f);
   #include <colorspace_fragment>
 }`;
 
@@ -73,16 +73,14 @@ function paintCard(c, e, img, T) {
     g.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
   } else {
     g.fillStyle = T.card; g.fillRect(0, 0, cw, ch);
-    // simple photo placeholder icon
-    const cx = cw / 2, cy = ch * .42, s = 120;
-    g.strokeStyle = T.mute; g.lineWidth = 7; g.lineJoin = "round"; g.globalAlpha = .55;
-    rr(g, cx - s, cy - s * .78, s * 2, s * 1.56, 18); g.stroke();
-    g.beginPath(); g.arc(cx + s * .42, cy - s * .3, s * .17, 0, Math.PI * 2); g.stroke();
-    g.beginPath(); g.moveTo(cx - s + 8, cy + s * .55); g.lineTo(cx - s * .25, cy - s * .1); g.lineTo(cx + s * .2, cy + s * .3); g.lineTo(cx + s * .5, cy + s * .05); g.lineTo(cx + s - 8, cy + s * .5); g.stroke();
+    // the library mark (book shelf), drawn faintly
+    const cx = cw / 2, cy = ch * .4, k = 4.2, ox = cx - 32 * k, oy = cy - 32 * k;
+    g.globalAlpha = .28; g.fillStyle = T.acc;
+    [[13, 17, 10, 31], [26, 12, 11, 36], [40, 20, 10, 28], [10, 49, 44, 4]].forEach(([x, y, w, h]) => { g.beginPath(); g.roundRect(ox + x * k, oy + y * k, w * k, h * k, 2 * k); g.fill(); });
     g.globalAlpha = 1;
     g.direction = "rtl"; g.textAlign = "center"; g.textBaseline = "middle";
-    let fs = 56; g.font = `700 ${fs}px "Amiri"`;
-    while (g.measureText(e.title || "").width > cw * .82 && fs > 30) { fs -= 3; g.font = `700 ${fs}px "Amiri"`; }
+    let fs = 70; g.font = `700 ${fs}px "Lateef"`;
+    while (g.measureText(e.title || "").width > cw * .82 && fs > 30) { fs -= 3; g.font = `700 ${fs}px "Lateef"`; }
     g.fillStyle = T.ink; g.fillText(e.title || "", cx, ch * .78);
   }
   g.restore();
@@ -91,7 +89,7 @@ function paintCard(c, e, img, T) {
 function paintYear(c, text, T) {
   const g = c.getContext("2d"); g.clearRect(0, 0, c.width, c.height);
   g.direction = "rtl"; g.textAlign = "center"; g.textBaseline = "middle";
-  g.font = '700 92px "Rubik"'; g.fillStyle = T.acc; g.fillText(text, c.width / 2, c.height / 2 + 6);
+  g.font = '700 96px "Aref Ruqaa"'; g.fillStyle = T.acc; g.fillText(text, c.width / 2, c.height / 2 + 6);
 }
 
 /* ---------- main ---------- */
@@ -104,7 +102,7 @@ export async function mountCV(root, entries, { reduced = false } = {}) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  try { await Promise.all([document.fonts.load('700 96px "Rubik"', "١٤٣٠ هـ"), document.fonts.load('700 50px "Amiri"', "المولد")]); } catch {}
+  try { await Promise.all([document.fonts.load('700 96px "Aref Ruqaa"', "١٤٣٠ هـ"), document.fonts.load('700 60px "Lateef"', "المولد")]); } catch {}
 
   let T = themeColors();
   const scene = new THREE.Scene();

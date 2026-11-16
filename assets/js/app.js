@@ -103,6 +103,9 @@ const hl = (txt, q) => {
   return e.replace(new RegExp(n, "gi"), m => `<mark>${m}</mark>`);
 };
 const norm = s => (s || "").replace(/[ً-ْـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").toLowerCase();
+/* بحث مرن: كل كلمة تُطابَق بلا «ال» وحروف العطف والجر الملتصقة، وتكفي مطابقة جذع الكلمة */
+const qWords = q => norm(q).split(/\s+/).map(w => w.replace(/^(و|ف|ب|ل|ك)?(ال|لل)/, "")).filter(w => w.length > 1);
+const matches = (text, ws) => { const t = norm(text); return ws.every(w => t.includes(w)); };
 function row(it, { chip = true, q = "", plain = false } = {}) {
   const sr = it.parent && SERIES[it.parent], heard = !!store.heard[it.id];
   const label = hl(it.title, q);
@@ -236,7 +239,7 @@ function bootCV() {
     if (!ents.some(e => e.isIntersecting)) return;
     io.disconnect();
     try {
-      const mod = await import("./cv3d.js");
+      const mod = await import("./cv3d.js?v=6");
       if (destroyed) return;
       handle = await mod.mountCV(root, cv, { reduced });
       if (destroyed) handle?.destroy(); else if (!handle) cvFallback(root, cv);
@@ -348,7 +351,7 @@ function viewList(items, title, desc, crumbs = [], opts = {}) {
   let kind = "", topic = "";
   const draw = () => {
     const q = $("#flt").value.trim(), n = norm(q);
-    const l = items.filter(it => (!kind || it.kind === kind) && (!topic || it.topic === topic) && (!n || norm(titleOf(it) + " " + (it.desc || "")).includes(n)));
+    const l = items.filter(it => (!kind || it.kind === kind) && (!topic || it.topic === topic) && (!n || matches(titleOf(it) + " " + (it.desc || "") + " " + (TOPIC[it.topic]?.title || ""), qWords(q))));
     $("#cnt").textContent = `${arN(l.length)} من ${arN(items.length)}`;
     const ys = groupByYear(l).map(([y]) => y).filter(Boolean);
     $("#yrs").innerHTML = ys.length > 2 ? ys.map(y => `<a class="pill" href="#y-${y}" data-y="${y}">${arD(y)}</a>`).join("") : "";
@@ -440,8 +443,8 @@ function viewSearch(q) {
     <p class="count" id="cnt"></p><div id="bres"></div><ol class="rows" id="res"></ol></div>`);
   const run = () => {
     const v = $("#sq").value.trim(), n = norm(v);
-    const res = !n ? [] : ALL.filter(it => norm([titleOf(it), it.desc, (SERIES[it.parent]?.author) || ""].join(" ")).includes(n));
-    const bres = !n ? [] : [...BOOKS, ...COURSES, ...PROGRAMS].filter(s => norm(s.title + " " + (s.author || "")).includes(n));
+    const res = !n ? [] : ALL.filter(it => matches([titleOf(it), it.desc, SERIES[it.parent]?.title, SERIES[it.parent]?.author, TOPIC[it.topic]?.title].join(" "), qWords(v)));
+    const bres = !n ? [] : [...BOOKS, ...COURSES, ...PROGRAMS].filter(s => matches(s.title + " " + (s.author || ""), qWords(v)));
     $("#cnt").textContent = n ? `${arN(res.length)} نتيجة${bres.length ? ` · ${arN(bres.length)} كتاب/برنامج` : ""}` : "";
     $("#bres").innerHTML = bres.length ? `<div class="pills" style="margin-bottom:14px">${bres.map(s => `<a class="pill" href="#/${s.type}/${esc(s.id)}">${ico({ book: "book", course: "layers", program: "clip" }[s.type])}${hl(s.title, v)}</a>`).join("")}</div>` : "";
     $("#res").innerHTML = n && !res.length && !bres.length ? `<div class="empty">لا نتائج لـ «${esc(v)}»</div>` : res.slice(0, 200).map(it => row(it, { q: v })).join("");
@@ -467,10 +470,11 @@ const NAV = [
 ];
 const NAV_OF = { topics: "more", topic: "more", book: "books", course: "courses", program: "programs", post: "blog", archive: "more", search: "" };
 function chrome() {
-  $("#brand").innerHTML = `<span>${esc(S.short || S.brand || "")}</span>`;
+  const LOGO = `<span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#2E5E4E"/><rect x="13" y="17" width="10" height="31" rx="2" fill="#F2ECE1"/><rect x="26" y="12" width="11" height="36" rx="2" fill="#F2ECE1"/><rect x="40" y="20" width="10" height="28" rx="2" fill="#F2ECE1" opacity=".82"/><path d="M13 24h10M26 19h11M26 42h11M40 27h10" stroke="#2E5E4E" stroke-width="2"/><rect x="10" y="49" width="44" height="4" rx="2" fill="#F2ECE1"/></svg></span>`;
+  $("#brand").innerHTML = `${LOGO}<span>${esc(S.short || S.brand || "")}</span>`;
   $("#tnav").innerHTML = NAV.map(([h, t, k]) => `<a href="${h}" data-k="${k}">${t}</a>`).join("");
   $$("[data-ico]").forEach(el => el.innerHTML = ico(el.dataset.ico));
-  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/">${esc(S.brand || "")}</a><span>${esc(S.footer || "")}${Y.updated ? ` · آخر تحديث من يوتيوب: ${esc(Y.updated)}` : ""}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
+  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/">${LOGO}<span>${esc(S.brand || "")}</span></a><span>${esc(S.footer || "")}${Y.updated ? ` · آخر تحديث من يوتيوب: ${esc(Y.updated)}` : ""}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
   const top = $("#top"), mb = $("#menu-btn");
   mb.addEventListener("click", () => { const o = top.classList.toggle("nav-open"); mb.setAttribute("aria-expanded", o); });
   document.addEventListener("click", e => {
