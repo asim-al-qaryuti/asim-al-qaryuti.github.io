@@ -219,6 +219,7 @@ export async function mountCV(root, entries, { reduced = false } = {}) {
       panel.querySelector("h3").textContent = e.title || "";
       const pl = panel.querySelector(".pl"); pl.hidden = !e.place; pl.querySelector("span").textContent = e.place || "";
       panel.querySelector("p").textContent = e.text || "";
+      const lk = panel.querySelector(".lk"); if (lk) lk.innerHTML = window.__cvLinks ? window.__cvLinks(e) : "";
       panel.classList.remove("swap");
     }, reduced ? 0 : 110);
   };

@@ -64,18 +64,29 @@ const hours = list => Math.round(list.reduce((a, it) => a + secs(it.dur), 0) / 3
 /* ---------- data model ---------- */
 const CATS = S.categories || [];
 const CAT = Object.fromEntries(CATS.map(c => [c.id, c]));
-const KIND = { lesson: "درس", course: "دورة", khutbah: "خطبة جمعة", lecture: "محاضرة", clip: "مقطع" };
+const KIND = { lesson: "درس", course: "دورة", program: "حلقة", khutbah: "خطبة جمعة", lecture: "محاضرة", clip: "مقطع" };
+/* مكتبة يوتيوب (data/youtube.js — تُحدَّث تلقائيًا من القناة) */
+const Y = window.YT || {}, YV = Y.videos || {}, YL = Y.lib || {};
+const fmtDur = t => { if (!t) return ""; const h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), x = t % 60; return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+const TOPICS = YL.topics || [], TOPIC = Object.fromEntries(TOPICS.map(t => [t.id, t])), TOPIC_OF = YL.topic_of || {};
+const ytItem = id => YV[id] && { id, title: YV[id].t, date: YV[id].d, dur: fmtDur(YV[id].s), short: !!YV[id].sh, desc: YV[id].x || "", topic: TOPIC_OF[id], media: { type: "youtube", id } };
+const ytSeries = k => (YL.series || []).filter(s => s.kind === k).map(s => ({ ...s, lessons: s.items.map(ytItem).filter(Boolean) }));
+const ytList = k => (YL[k] || []).map(ytItem).filter(Boolean);
+const LESSON_KIND = { book: "lesson", course: "course", program: "program" };
 const series = (list, kind) => (list || []).map(s => {
-  const lessons = (s.lessons || []).map((l, i) => ({ ...l, id: l.id || `${s.id}-${i + 1}`, kind: kind === "book" ? "lesson" : "course", parent: s.id, _d: parseDate(l.date) }));
+  const lessons = (s.lessons || []).map((l, i) => ({ ...l, id: l.id || `${s.id}-${i + 1}`, kind: LESSON_KIND[kind], parent: s.id, _d: parseDate(l.date) }));
   const ds = lessons.map(l => l._d).filter(Boolean).sort((a, b) => a - b);
   return { ...s, type: kind, lessons, _first: ds[0], _last: ds[ds.length - 1] };
-});
-const BOOKS = series(S.books, "book");
+}).filter(s => s.lessons.length);
+const BOOKS = series([...(S.books || []), ...ytSeries("book")], "book");
 const COURSES = series(S.courses, "course").sort((a, b) => (b._first || 0) - (a._first || 0));
-const SERIES = Object.fromEntries([...BOOKS, ...COURSES].map(s => [s.id, s]));
+const PROGRAMS = series(ytSeries("program"), "program").sort((a, b) => (b._last || 0) - (a._last || 0));
+const SERIES = Object.fromEntries([...BOOKS, ...COURSES, ...PROGRAMS].map(s => [s.id, s]));
 const singles = (list, kind) => (list || []).map(x => ({ ...x, kind, _d: parseDate(x.date) })).sort((a, b) => (b._d || 0) - (a._d || 0));
-const KHUTAB = singles(S.khutab, "khutbah"), LECTURES = singles(S.lectures, "lecture"), CLIPS = singles(S.clips, "clip");
-const ALL = [...BOOKS.flatMap(b => b.lessons), ...COURSES.flatMap(c => c.lessons), ...KHUTAB, ...LECTURES, ...CLIPS].sort((a, b) => (b._d || 0) - (a._d || 0));
+const KHUTAB = singles([...(S.khutab || []), ...ytList("khutab")], "khutbah");
+const LECTURES = singles([...(S.lectures || []), ...ytList("lectures")], "lecture");
+const CLIPS = singles([...(S.clips || []), ...ytList("clips")], "clip");
+const ALL = [...BOOKS, ...COURSES, ...PROGRAMS].flatMap(s => s.lessons).concat(KHUTAB, LECTURES, CLIPS).sort((a, b) => (b._d || 0) - (a._d || 0));
 const BY_ID = Object.fromEntries(ALL.map(it => [it.id, it]));
 const POSTS = (S.blog || []).map(p => ({ ...p, _d: parseDate(p.date) })).sort((a, b) => (b._d || 0) - (a._d || 0));
 
@@ -94,23 +105,27 @@ const hl = (txt, q) => {
 const norm = s => (s || "").replace(/[ً-ْـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").toLowerCase();
 function row(it, { chip = true, q = "", plain = false } = {}) {
   const sr = it.parent && SERIES[it.parent], heard = !!store.heard[it.id];
-  const label = plain || !sr ? hl(it.title, q) : `${hl(sr.title, q)} <span class="sub">— ${hl(it.title, q)}</span>`;
+  const label = hl(it.title, q);
   return `<li class="row${heard ? " heard" : ""}" data-id="${esc(it.id)}">
     <button class="mk" type="button" data-heard="${esc(it.id)}" aria-pressed="${heard}" aria-label="علِّم «${esc(titleOf(it))}» كمسموع" title="علِّم كمسموع">${ico("check")}</button>
     <div class="rb">
       <a class="rt" href="#/lesson/${esc(it.id)}">${label}</a>
       <div class="rm">${!it.parent ? `<span class="rk">${KIND[it.kind]}</span>` : ""}${it._d ? `<span>${hijri(it._d)}</span><span>${fG.format(it._d)}</span>` : ""}${it.dur ? `<span class="rdur" dir="ltr">${arD(it.dur)}</span>` : ""}${isNew(it) ? `<span class="new">جديد</span>` : ""}</div>
-      ${chip && sr ? `<div class="rc"><a class="chip" href="#/${sr.type}/${esc(sr.id)}">${ico(sr.type === "book" ? "book" : "layers")}${esc(sr.title)}</a></div>` : ""}
+      ${chip && sr ? `<div class="rc"><a class="chip" href="#/${sr.type}/${esc(sr.id)}">${ico({ book: "book", course: "layers", program: "clip" }[sr.type])}${esc(sr.title)}</a></div>` : ""}
     </div>
     <div class="ra">${mediaBtn(it)}</div>
   </li>`;
 }
 function cover(s) {
+  if (s.type === "program") return `<span class="cover thumb"><img src="https://i.ytimg.com/vi/${esc(s.lessons[0].id)}/hqdefault.jpg" alt="" loading="lazy"></span>`;
   if (s.type === "course") return `<span class="cover" style="--c:#2A2416">${s.cover ? `<img src="${esc(s.cover)}" alt="" loading="lazy">` : `<span class="cc">دورة علمية</span><span class="ct">${esc(s.title)}</span>${s.place ? `<span class="ca">${esc(s.place)}</span>` : ""}`}</span>`;
   const c = CAT[s.cat];
   return `<span class="cover" style="--c:${esc(c?.color || "#1E4A78")}">${s.cover ? `<img src="${esc(s.cover)}" alt="" loading="lazy">` : `<span class="cc">${esc(c?.title || "")}</span><span class="ct">${esc(s.title)}</span>${s.author ? `<span class="ca">${esc(s.author)}</span>` : ""}`}</span>`;
 }
 const yearSpan = s => s._first ? (s._first.getFullYear() === s._last.getFullYear() ? arN(s._first.getFullYear()).replace(/٬/g, "") : `${arD(s._first.getFullYear())}–${arD(s._last.getFullYear())}`) : "";
+const nEps = n => `${arN(n)} ${n === 1 ? "حلقة" : n === 2 ? "حلقتان" : n <= 10 ? "حلقات" : "حلقة"}`;
+const nUnits = s => s.type === "program" ? nEps(s.lessons.length) : nSessions(s.lessons.length);
+const pcard = p => `<a class="pcard" href="#/program/${esc(p.id)}">${cover(p)}<span class="pt">${esc(p.title)}</span><span class="pm">${nEps(p.lessons.length)}${p._first ? " · " + yearSpan(p) : ""}</span></a>`;
 const nSessions = n => `${arN(n)} ${n === 1 ? "مجلس" : n === 2 ? "مجلسان" : n <= 10 ? "مجالس" : "مجلسًا"}`;
 const bcard = b => `<a class="bcard" href="#/book/${esc(b.id)}">${cover(b)}<span class="bt">${esc(b.title)}</span><span class="bm">${nSessions(b.lessons.length)}${b._first ? " · " + yearSpan(b) : ""}</span></a>`;
 const ccard = c => `<a class="ccard" href="#/course/${esc(c.id)}">${cover(c)}<span class="cbody"><span class="c-pre">${esc(c.book || "دورة علمية")}</span><span class="c-t">${esc(c.title)}</span>
@@ -142,7 +157,7 @@ function pageHead(title, desc, crumbs = [], extra = "") {
 /* ---------- home ---------- */
 function viewHome() {
   const p = S.person || {};
-  const stats = [[ALL.length, "تسجيلًا"], [hours(ALL), "ساعة"], [BOOKS.length, "كتابًا"], [COURSES.length, "دورات"], [KHUTAB.length, "خطبة"]];
+  const stats = [[ALL.length, "تسجيلًا"], [hours(ALL), "ساعة"], [BOOKS.length, "كتب"], [PROGRAMS.length, "برنامجًا"], [LECTURES.length, "محاضرة"]];
   const quick = (S.quick || []).map(id => SERIES[id]).filter(Boolean);
   const ups = (S.upcoming || []).map(u => {
     const d = parseDate(u.date), e = parseDate(u.end), days = d ? Math.ceil((d - Date.now()) / 864e5) : null;
@@ -173,13 +188,15 @@ function viewHome() {
         <ol class="rows">${ALL.slice(0, 7).map(it => row(it)).join("")}</ol></section>
       <div>
         ${ups ? `<section class="sec"><div class="sec-h"><h2>قادم</h2></div><div class="ups">${ups}</div></section>` : ""}
-        <section class="sec"><div class="sec-h"><h2>أحدث الدورات</h2><a class="more" href="#/courses">الكل${ico("arrow")}</a></div>
-          <div class="dgrid">${COURSES.slice(0, 3).map(ccard).join("")}</div></section>
+        ${COURSES.length ? `<section class="sec"><div class="sec-h"><h2>أحدث الدورات</h2><a class="more" href="#/courses">الكل${ico("arrow")}</a></div>
+          <div class="dgrid">${COURSES.slice(0, 3).map(ccard).join("")}</div></section>` : ""}
+        <section class="sec"><div class="sec-h"><h2>البرامج</h2><a class="more" href="#/programs">الكل${ico("arrow")}</a></div>
+          <div class="pgrid small">${PROGRAMS.slice(0, 4).map(pcard).join("")}</div></section>
       </div>
     </div>
     <section class="sec"><div class="sec-h"><h2>الكتب والشروح</h2><p>أكثر الكتب مجالس</p><a class="more" href="#/books">كل الكتب${ico("arrow")}</a></div>
       <div class="bgrid">${topBooks.map(bcard).join("")}</div>
-      ${quick.length ? `<nav class="m-quick" style="margin-top:18px" aria-label="روابط سريعة">${quick.map(b => `<a href="#/book/${esc(b.id)}">${esc(b.title)}</a>`).join("")}</nav>` : ""}</section>
+      ${quick.length ? `<nav class="m-quick" style="margin-top:18px" aria-label="روابط سريعة">${quick.map(b => `<a href="#/${b.type}/${esc(b.id)}">${esc(b.title)}</a>`).join("")}</nav>` : ""}</section>
   </div></div>
   ${cv.length ? cvSection(cv) : ""}`);
   $("#home-search").addEventListener("submit", e => { e.preventDefault(); location.hash = "#/search?q=" + encodeURIComponent($("#home-q").value.trim()); });
@@ -187,13 +204,20 @@ function viewHome() {
 }
 
 /* ---------- CV (3D) ---------- */
+function cvLinks(e) {
+  return (e.links || []).map(l => {
+    const href = l.href || (l.id && BY_ID[l.id] ? "#/lesson/" + l.id : "");
+    return href ? `<li><a href="${esc(href)}">${ico(l.id ? "play" : "arrow")}<span>${esc(l.t)}</span></a></li>` : "";
+  }).join("");
+}
+window.__cvLinks = cvLinks;
 function cvSection(cv) {
   const n = cv.length, e = cv[0];
   return `<section class="cv" id="cv" style="height:${Math.round(n * 42 + 40)}svh" aria-labelledby="cv-title">
     <div class="cv-pin">
       <canvas aria-hidden="true"></canvas>
       <div class="cv-head"><h2 id="cv-title">السيرة الذاتية</h2></div>
-      <div class="cv-panel" aria-live="polite"><div class="in"><div class="y">${esc(e.year)}</div><h3>${esc(e.title)}</h3><div class="pl"${e.place ? "" : " hidden"}>${ico("pin")}<span>${esc(e.place || "")}</span></div><p>${esc(e.text || "")}</p></div></div>
+      <div class="cv-panel" aria-live="polite"><div class="in"><div class="y">${esc(e.year)}</div><h3>${esc(e.title)}</h3><div class="pl"${e.place ? "" : " hidden"}>${ico("pin")}<span>${esc(e.place || "")}</span></div><p>${esc(e.text || "")}</p><ul class="lk">${cvLinks(e)}</ul></div></div>
       <ol class="cv-rail" aria-label="محطات السيرة">${cv.map((x, i) => `<li><button type="button" data-go="${i}" aria-current="${i === 0}" aria-label="${esc(x.year + " — " + x.title)}"><span class="yr">${esc(x.year)}</span></button></li>`).join("")}</ol>
       <div class="cv-count" aria-hidden="true"><span><b id="cv-n">١</b> / ${arN(n)}</span><span class="cv-bar"><i id="cv-bar"></i></span><span>مرّر للأسفل</span></div>
     </div>
@@ -202,7 +226,7 @@ function cvSection(cv) {
 function cvFallback(root, cv) {
   root.classList.add("static"); root.style.height = "auto";
   $(".cv-pin", root).innerHTML = `<div class="wrap"><div class="cv-head" style="position:static;padding-top:40px"><h2>السيرة الذاتية</h2></div>
-   <ol class="cv-fallback">${cv.map(e => `<li><b>${esc(e.year)}</b><h3>${esc(e.title)}</h3>${e.place ? `<p>${esc(e.place)}</p>` : ""}<p>${esc(e.text || "")}</p></li>`).join("")}</ol></div>`;
+   <ol class="cv-fallback">${cv.map(e => `<li><b>${esc(e.year)}</b><h3>${esc(e.title)}</h3>${e.place ? `<p>${esc(e.place)}</p>` : ""}<p>${esc(e.text || "")}</p><ul class="lk">${cvLinks(e)}</ul></li>`).join("")}</ol></div>`;
 }
 function bootCV() {
   const root = $("#cv"), cv = S.cv;
@@ -255,10 +279,10 @@ function viewSeries(id) {
   if (!s) return viewNotFound();
   const isBook = s.type === "book", c = CAT[s.cat];
   const st = { asc: isBook };
-  const crumbs = isBook ? [["#/books", "الكتب والشروح"], ...(c ? [["#/books", c.title]] : [])] : [["#/courses", "الدورات"]];
+  const crumbs = isBook ? [["#/books", "الكتب والشروح"], ...(c ? [["#/books", c.title]] : [])] : s.type === "program" ? [["#/programs", "البرامج"]] : [["#/courses", "الدورات"]];
   const extra = `
     <div class="bstats">${s.author ? `<span>${ico("pen")}${isBook ? "تأليف: " : ""}${esc(s.author)}</span>` : ""}${s.book ? `<span>${ico("book")}${esc(s.book)}</span>` : ""}${s.place ? `<span>${ico("pin")}${esc(s.place)}</span>` : ""}
-      <span>${ico("layers")}${nSessions(s.lessons.length)}</span><span>${ico("clock")}${arN(hours(s.lessons))} ساعة</span>
+      <span>${ico("layers")}${nUnits(s)}</span><span>${ico("clock")}${arN(hours(s.lessons))} ساعة</span>
       ${s._first ? `<span>${ico("cal")}${fG.format(s._first)} – ${fG.format(s._last)}</span>` : ""}</div>
     ${s.desc ? `<p style="margin-top:10px">${esc(s.desc)}</p>` : ""}
     <div class="prog"><span id="pg-t"></span><span class="bar"><i id="pg-b"></i></span></div>`;
@@ -267,7 +291,7 @@ function viewSeries(id) {
       <h1>${esc(s.title)}</h1>${extra}</div>${cover(s)}</div></header>
   <div class="wrap page">
     <div class="toolbar"><div class="seg" id="ord"><button type="button" data-a="1">الأقدم أولًا</button><button type="button" data-a="0">الأحدث أولًا</button></div>
-      <div class="pills" id="yrs"></div><span class="count" style="margin:0 auto 0 0">${nSessions(s.lessons.length)}</span></div>
+      <div class="pills" id="yrs"></div><span class="count" style="margin:0 auto 0 0">${nUnits(s)}</span></div>
     <div id="lst"></div>
   </div>`);
   const prog = () => { const h = s.lessons.filter(l => store.heard[l.id]).length; $("#pg-t").textContent = `سمعت ${arN(h)} من ${arN(s.lessons.length)}`; $("#pg-b").style.width = (h / s.lessons.length * 100) + "%"; };
@@ -285,6 +309,18 @@ function viewSeries(id) {
   draw();
 }
 
+/* ---------- programs ---------- */
+function viewPrograms() {
+  V(`${pageHead("البرامج والسلاسل", `${arN(PROGRAMS.length)} برنامجًا وسلسلة، مرتبة بأحدث حلقة.`)}
+  <div class="wrap page"><div class="pgrid">${PROGRAMS.map(pcard).join("")}</div></div>`);
+}
+
+function viewTopics() {
+  const list = TOPICS.map(t => [t, ALL.filter(x => x.topic === t.id).length]).filter(([, n]) => n);
+  V(`${pageHead("المواضيع", "المحاضرات والخطب والمقاطع مصنفة حسب الموضوع.")}
+  <div class="wrap page"><div class="tiles">${list.map(([t, n]) => `<a class="tile" href="#/topic/${esc(t.id)}"><span class="ti">${ico("grid")}</span><span><b>${esc(t.title)}</b><span>${arN(n)} مادة</span></span></a>`).join("")}</div></div>`);
+}
+
 /* ---------- courses ---------- */
 function viewCourses() {
   const g = groupByYear(COURSES.map(c => ({ ...c, _d: c._first })));
@@ -294,24 +330,32 @@ function viewCourses() {
   </div>`);
 }
 
+function topicPills(items) {
+  const tc = TOPICS.map(t => [t, items.filter(i => i.topic === t.id).length]).filter(([, n]) => n);
+  if (tc.length < 2) return "";
+  return `<div class="pills" id="tops" style="width:100%"><button class="pill" type="button" data-t="" aria-pressed="true">كل المواضيع</button>${tc.map(([t, n]) => `<button class="pill" type="button" data-t="${t.id}" aria-pressed="false">${esc(t.title)} <span class="n">${arN(n)}</span></button>`).join("")}</div>`;
+}
+
 /* ---------- simple year-grouped lists (khutab / lectures / clips / archive) ---------- */
 function viewList(items, title, desc, crumbs = [], opts = {}) {
   V(`${pageHead(title, desc, crumbs)}
   <div class="wrap page">
     <div class="toolbar"><label class="tfield">${ico("search")}<span class="sr">تصفية</span><input id="flt" type="search" placeholder="تصفية بالعنوان…" autocomplete="off"></label>
+      ${opts.topics !== false ? topicPills(items) : ""}
       ${opts.kinds ? `<div class="pills" id="kinds"><button class="pill" type="button" data-k="" aria-pressed="true">الكل</button>${Object.entries(KIND).filter(([k]) => items.some(i => i.kind === k)).map(([k, t]) => `<button class="pill" type="button" data-k="${k}" aria-pressed="false">${t}</button>`).join("")}</div>` : ""}</div>
     <p class="count" id="cnt"></p><div id="yrs" class="pills" style="margin-bottom:6px"></div><div id="lst"></div>
   </div>`);
-  let kind = "";
+  let kind = "", topic = "";
   const draw = () => {
     const q = $("#flt").value.trim(), n = norm(q);
-    const l = items.filter(it => (!kind || it.kind === kind) && (!n || norm(titleOf(it) + " " + (it.desc || "")).includes(n)));
+    const l = items.filter(it => (!kind || it.kind === kind) && (!topic || it.topic === topic) && (!n || norm(titleOf(it) + " " + (it.desc || "")).includes(n)));
     $("#cnt").textContent = `${arN(l.length)} من ${arN(items.length)}`;
-    const ys = groupByYear(l).map(([y]) => y);
+    const ys = groupByYear(l).map(([y]) => y).filter(Boolean);
     $("#yrs").innerHTML = ys.length > 2 ? ys.map(y => `<a class="pill" href="#y-${y}" data-y="${y}">${arD(y)}</a>`).join("") : "";
     $("#lst").innerHTML = l.length ? yearGroups(l, { q }) : `<div class="empty">لا نتائج</div>`;
   };
   $("#flt").addEventListener("input", draw);
+  $("#tops")?.addEventListener("click", e => { const b = e.target.closest("[data-t]"); if (!b) return; topic = b.dataset.t; $$("#tops .pill").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); });
   $("#kinds")?.addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (!b) return; kind = b.dataset.k; $$("#kinds .pill").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); });
   $("#yrs").addEventListener("click", e => { const a = e.target.closest("[data-y]"); if (a) { e.preventDefault(); $("#y-" + a.dataset.y)?.scrollIntoView({ behavior: "smooth" }); } });
   draw();
@@ -323,12 +367,13 @@ function viewLesson(id) {
   if (!it) return viewNotFound();
   const s = it.parent && SERIES[it.parent], m = it.media || {};
   let player = `<div class="player"><span class="pi">${ico("play")}</span><span>سيُضاف التسجيل قريبًا</span></div>`;
-  if (m.type === "youtube") player = `<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(m.id)}" title="${esc(titleOf(it))}" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`;
+  if (m.type === "youtube") player = `<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(m.id)}" title="${esc(titleOf(it))}" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
   else if (m.type === "audio") player = `<div class="player audio"><audio controls preload="none" src="${esc(m.src)}"></audio></div>`;
   else if (m.type === "pdf") player = `<div class="player" style="aspect-ratio:3/4"><iframe src="${esc(m.src)}" title="${esc(it.title)}"></iframe></div>`;
   else if (m.type === "link") player = `<div class="player"><a class="btn-acc" href="${esc(m.href)}" target="_blank" rel="noopener">${ico("link")} فتح الرابط</a></div>`;
   const listPage = { khutbah: ["#/khutab", "الخطب"], lecture: ["#/lectures", "المحاضرات"], clip: ["#/clips", "المقاطع"] }[it.kind];
-  const crumbs = s ? [[s.type === "book" ? "#/books" : "#/courses", s.type === "book" ? "الكتب والشروح" : "الدورات"], [`#/${s.type}/${s.id}`, s.title]] : [listPage];
+  const top = { book: ["#/books", "الكتب والشروح"], course: ["#/courses", "الدورات"], program: ["#/programs", "البرامج"] };
+  const crumbs = s ? [top[s.type], [`#/${s.type}/${s.id}`, s.title]] : [listPage];
   const pool = s ? s.lessons : ALL.filter(x => x.kind === it.kind);
   const idx = pool.findIndex(x => x.id === id);
   const sib = s ? pool : pool.slice(Math.max(0, idx - 3), idx + 4);
@@ -337,14 +382,15 @@ function viewLesson(id) {
   <div class="wrap page"><div class="item-wrap">
     <article>
       ${player}
-      <div class="rm" style="font-size:13.5px;margin:14px 0">${it._d ? `<span>${ico("cal")} ${hijri(it._d)}</span><span>${fG.format(it._d)}</span>` : ""}${it.dur ? `<span dir="ltr">${arD(it.dur)}</span>` : ""}</div>
+      <div class="rm" style="font-size:13.5px;margin:14px 0">${it._d ? `<span>${ico("cal")} ${hijri(it._d)}</span><span>${fG.format(it._d)}</span>` : ""}${it.dur ? `<span dir="ltr">${arD(it.dur)}</span>` : ""}${it.topic && TOPIC[it.topic] ? `<a class="chip" href="#/topic/${esc(it.topic)}">${esc(TOPIC[it.topic].title)}</a>` : ""}</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
         <button class="btn${heard ? " on" : ""}" type="button" data-heard="${esc(id)}" aria-pressed="${heard}">${ico("check")}<span>${heard ? "مسموع" : "علِّم كمسموع"}</span></button>
         ${idx > 0 ? `<a class="btn" href="#/lesson/${esc(pool[idx - 1].id)}">السابق</a>` : ""}${idx < pool.length - 1 ? `<a class="btn" href="#/lesson/${esc(pool[idx + 1].id)}">التالي</a>` : ""}
+        ${m.type === "youtube" ? `<a class="btn" href="https://www.youtube.com/watch?v=${encodeURIComponent(m.id)}" target="_blank" rel="noopener">${ico("video")}<span>على يوتيوب</span></a>` : ""}
       </div>
       ${it.desc ? `<div class="prose"><p>${esc(it.desc).replace(/\n+/g, "</p><p>")}</p></div>` : ""}
     </article>
-    <aside class="side"><div class="pane"><h3>${s ? "مجالس الكتاب" : "من " + esc(listPage[1])}</h3><ol class="rows">${sib.map(x => row(x, { chip: false, plain: true })).join("")}</ol></div></aside>
+    <aside class="side"><div class="pane"><h3>${s ? (s.type === "program" ? "حلقات البرنامج" : "مجالس الكتاب") : "من " + esc(listPage[1])}</h3><ol class="rows">${sib.map(x => row(x, { chip: false, plain: true })).join("")}</ol></div></aside>
   </div></div>`);
   $(`.side .row[data-id="${CSS.escape(id)}"]`)?.style.setProperty("border-color", "var(--acc)");
 }
@@ -363,15 +409,16 @@ function viewPost(id) {
 /* ---------- more / about / search ---------- */
 function viewMore() {
   const T = [
-    ["#/about", "user", "عن الشيخ والسيرة", "نبذة عن الشيخ وسيرته الذاتية"],
+    ["#/archive", "archive", "الأرشيف بالتاريخ", "كل التسجيلات مرتبة بالسنة"],
     ["#/books", "book", "الكتب والشروح", `${arN(BOOKS.length)} كتابًا`],
-    ["#/courses", "layers", "الدورات العلمية", `${arN(COURSES.length)} دورة`],
+    ["#/programs", "clip", "البرامج والسلاسل", `${arN(PROGRAMS.length)} برنامجًا`],
+    ...(COURSES.length ? [["#/courses", "layers", "الدورات العلمية", `${arN(COURSES.length)} دورة`]] : []),
     ["#/khutab", "minbar", "الخطب", `${arN(KHUTAB.length)} خطبة`],
     ["#/lectures", "mic", "المحاضرات والكلمات", `${arN(LECTURES.length)} محاضرة`],
     ["#/clips", "clip", "مقاطع وفوائد", `${arN(CLIPS.length)} مقطعًا`],
-    ["#/archive", "archive", "الأرشيف بالتاريخ", "كل التسجيلات مرتبة بالسنة"],
     ["#/search", "search", "البحث في المكتبة", "في العناوين والكتب والخطب"],
-    ["#/blog", "pen", "المدونة", "مقالات وفوائد مكتوبة"]
+    ["#/topics", "grid", "المواضيع", `${arN(TOPICS.length)} موضوعًا`],
+    ...(POSTS.length ? [["#/blog", "pen", "المدونة", "مقالات وفوائد مكتوبة"]] : [])
   ];
   V(`${pageHead("المزيد", "")}
   <div class="wrap page">
@@ -381,7 +428,7 @@ function viewMore() {
 }
 function viewAbout() {
   const a = S.about || {}, p = S.person || {}, cv = S.cv || [];
-  V(`${pageHead("عن الشيخ", esc((p.pre ? p.pre + " " : "") + (p.name || "")), [["#/more", "المزيد"]])}
+  V(`${pageHead("السيرة", esc((p.pre ? p.pre + " " : "") + (p.name || "")))}
   <div class="wrap page"><div class="prose" style="max-width:780px">${(a.paragraphs || []).map(t => `<p>${esc(t)}</p>`).join("")}</div></div>
   ${cv.length ? cvSection(cv) : ""}`);
   if (cv.length) bootCV();
@@ -394,9 +441,9 @@ function viewSearch(q) {
   const run = () => {
     const v = $("#sq").value.trim(), n = norm(v);
     const res = !n ? [] : ALL.filter(it => norm([titleOf(it), it.desc, (SERIES[it.parent]?.author) || ""].join(" ")).includes(n));
-    const bres = !n ? [] : [...BOOKS, ...COURSES].filter(s => norm(s.title + " " + (s.author || "")).includes(n));
-    $("#cnt").textContent = n ? `${arN(res.length)} نتيجة${bres.length ? ` · ${arN(bres.length)} كتاب/دورة` : ""}` : "";
-    $("#bres").innerHTML = bres.length ? `<div class="pills" style="margin-bottom:14px">${bres.map(s => `<a class="pill" href="#/${s.type}/${esc(s.id)}">${ico(s.type === "book" ? "book" : "layers")}${hl(s.title, v)}</a>`).join("")}</div>` : "";
+    const bres = !n ? [] : [...BOOKS, ...COURSES, ...PROGRAMS].filter(s => norm(s.title + " " + (s.author || "")).includes(n));
+    $("#cnt").textContent = n ? `${arN(res.length)} نتيجة${bres.length ? ` · ${arN(bres.length)} كتاب/برنامج` : ""}` : "";
+    $("#bres").innerHTML = bres.length ? `<div class="pills" style="margin-bottom:14px">${bres.map(s => `<a class="pill" href="#/${s.type}/${esc(s.id)}">${ico({ book: "book", course: "layers", program: "clip" }[s.type])}${hl(s.title, v)}</a>`).join("")}</div>` : "";
     $("#res").innerHTML = n && !res.length && !bres.length ? `<div class="empty">لا نتائج لـ «${esc(v)}»</div>` : res.slice(0, 200).map(it => row(it, { q: v })).join("");
   };
   $("#sf").addEventListener("submit", e => { e.preventDefault(); history.replaceState(null, "", "#/search?q=" + encodeURIComponent($("#sq").value.trim())); run(); });
@@ -406,13 +453,24 @@ function viewSearch(q) {
 function viewNotFound() { V(`${pageHead("الصفحة غير موجودة", "ربما نُقلت أو حُذفت.")}<div class="wrap page"><a class="btn" href="#/">${ico("arrow")}العودة للرئيسية</a></div>`); }
 
 /* ---------- chrome & router ---------- */
-const NAV = [["#/", "الرئيسية", "home"], ["#/books", "الكتب", "books"], ["#/courses", "الدورات", "courses"], ["#/khutab", "الخطب", "khutab"], ["#/lectures", "المحاضرات", "lectures"], ["#/clips", "المقاطع", "clips"], ["#/archive", "الأرشيف", "archive"], ["#/blog", "المدونة", "blog"], ["#/more", "المزيد", "more"]];
-const NAV_OF = { book: "books", course: "courses", post: "blog", about: "more", search: "" };
+const NAV = [
+  ["#/", "الرئيسية", "home"],
+  ...((S.cv || []).length ? [["#/about", "السيرة", "about"]] : []),
+  ["#/books", "الكتب", "books"],
+  ["#/programs", "البرامج", "programs"],
+  ["#/lectures", "المحاضرات", "lectures"],
+  ["#/khutab", "الخطب", "khutab"],
+  ["#/clips", "المقاطع", "clips"],
+  ...(COURSES.length ? [["#/courses", "الدورات", "courses"]] : []),
+  ...(POSTS.length ? [["#/blog", "المقالات", "blog"]] : []),
+  ["#/more", "المزيد", "more"]
+];
+const NAV_OF = { topics: "more", topic: "more", book: "books", course: "courses", program: "programs", post: "blog", archive: "more", search: "" };
 function chrome() {
   $("#brand").innerHTML = `<span>${esc(S.short || S.brand || "")}</span>`;
   $("#tnav").innerHTML = NAV.map(([h, t, k]) => `<a href="${h}" data-k="${k}">${t}</a>`).join("");
   $$("[data-ico]").forEach(el => el.innerHTML = ico(el.dataset.ico));
-  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/">${esc(S.brand || "")}</a><span>${esc(S.footer || "")}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
+  $("#foot").innerHTML = `<div class="wrap foot-in"><a class="brand" href="#/">${esc(S.brand || "")}</a><span>${esc(S.footer || "")}${Y.updated ? ` · آخر تحديث من يوتيوب: ${esc(Y.updated)}` : ""}</span><span>© ${arD(new Date().getFullYear())}</span></div>`;
   const top = $("#top"), mb = $("#menu-btn");
   mb.addEventListener("click", () => { const o = top.classList.toggle("nav-open"); mb.setAttribute("aria-expanded", o); });
   document.addEventListener("click", e => {
@@ -440,7 +498,10 @@ function route() {
   switch (key) {
     case "home": viewHome(); break;
     case "books": viewBooks(); title = "الكتب والشروح"; break;
-    case "book": case "course": viewSeries(arg); title = SERIES[arg]?.title; break;
+    case "book": case "course": case "program": viewSeries(arg); title = SERIES[arg]?.title; break;
+    case "programs": viewPrograms(); title = "البرامج"; break;
+    case "topics": viewTopics(); title = "المواضيع"; break;
+    case "topic": { const t = TOPIC[arg]; if (!t) { viewNotFound(); break; } const l = ALL.filter(x => x.topic === arg); viewList(l, t.title, `${arN(l.length)} مادة في هذا الموضوع.`, [["#/topics", "المواضيع"]], { topics: false, kinds: true }); title = t.title; break; }
     case "courses": viewCourses(); title = "الدورات"; break;
     case "khutab": viewList(KHUTAB, "الخطب", `${arN(KHUTAB.length)} خطبة جمعة، مرتبة من الأحدث.`); title = "الخطب"; break;
     case "lectures": viewList(LECTURES, "المحاضرات والكلمات", `${arN(LECTURES.length)} محاضرة.`); title = "المحاضرات"; break;
@@ -450,7 +511,7 @@ function route() {
     case "blog": viewBlog(); title = "المدونة"; break;
     case "post": viewPost(arg); title = POSTS.find(p => p.id === arg)?.title; break;
     case "more": viewMore(); title = "المزيد"; break;
-    case "about": viewAbout(); title = "عن الشيخ"; break;
+    case "about": viewAbout(); title = "السيرة"; break;
     case "search": viewSearch(new URLSearchParams(qs || "").get("q") || ""); title = "البحث"; break;
     default: viewNotFound();
   }

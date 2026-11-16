@@ -276,3 +276,24 @@ mark{background:#E9DDB0;color:inherit;padding:0 2px}
   .bhead{grid-template-columns:1fr 100px;gap:16px}
   .bgrid{grid-template-columns:repeat(2,1fr);gap:20px 14px}
 }
+
+/* programs (YouTube series) */
+.cover.thumb{aspect-ratio:16/9;padding:0;border-radius:var(--r);background:var(--sunk)}
+.cover.thumb::before{display:none}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px 18px}
+.pgrid.small{grid-template-columns:1fr 1fr;gap:16px 12px}
+.pcard{display:flex;flex-direction:column;gap:6px}
+.pcard .pt{font-size:19px;font-weight:700;line-height:1.4}
+.pcard:hover .pt{color:var(--acc)}
+.pcard .pm{font-size:15px;color:var(--mute)}
+.bhead .cover.thumb{align-self:start}
+@media (max-width:640px){.pgrid{grid-template-columns:1fr 1fr;gap:18px 12px}.pcard .pt{font-size:17px}}
+
+/* CV panel: related videos */
+.cv-panel .lk,.cv-fallback .lk{list-style:none;margin:10px 0 0;padding:8px 0 0;border-top:1px solid var(--line);display:grid;gap:2px}
+.cv-panel .lk:empty,.cv-fallback .lk:empty{display:none}
+.cv-panel .lk a,.cv-fallback .lk a{display:flex;align-items:center;gap:6px;font-size:16px;line-height:1.5;color:var(--acc)}
+.cv-panel .lk a:hover,.cv-fallback .lk a:hover{text-decoration:underline}
+.cv-panel .lk svg{width:.8em;height:.8em}
+.cv-panel{max-height:calc(100svh - 230px);overflow:auto}
+@media (max-width:760px){.cv-panel .lk li:nth-child(n+3){display:none}.cv-panel{max-height:none;overflow:visible}}
