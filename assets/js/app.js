@@ -119,7 +119,7 @@ function row(it, { chip = true, q = "", plain = false } = {}) {
       <div class="rm">${!it.parent ? `<span class="rk">${KIND[it.kind]}</span>` : ""}${it._d ? `<span>${hijri(it._d)}</span><span>${fG.format(it._d)}</span>` : ""}${it.dur ? `<span class="rdur" dir="ltr">${arD(it.dur)}</span>` : ""}${isNew(it) ? `<span class="new">جديد</span>` : ""}</div>
       ${chip && sr ? `<div class="rc"><a class="chip" href="#/${sr.type}/${esc(sr.id)}">${ico({ book: "book", course: "layers", program: "clip" }[sr.type])}${esc(sr.title)}</a></div>` : ""}
     </div>
-    <div class="ra">${mediaBtn(it)}</div>
+    <span class="ra" aria-hidden="true">${ico("arrow")}</span>
   </li>`;
 }
 function cover(s) {
@@ -242,7 +242,7 @@ function bootCV() {
     if (!ents.some(e => e.isIntersecting)) return;
     io.disconnect();
     try {
-      const mod = await import("./cv3d.js?v=7");
+      const mod = await import("./cv3d.js?v=8");
       if (destroyed) return;
       handle = await mod.mountCV(root, cv, { reduced });
       if (destroyed) handle?.destroy(); else if (!handle) cvFallback(root, cv);
@@ -373,7 +373,14 @@ function viewLesson(id) {
   if (!it) return viewNotFound();
   const s = it.parent && SERIES[it.parent], m = it.media || {};
   let player = `<div class="player"><span class="pi">${ico("play")}</span><span>سيُضاف التسجيل قريبًا</span></div>`;
-  if (m.type === "youtube") player = `<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(m.id)}" title="${esc(titleOf(it))}" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+  if (m.type === "youtube") {
+    const v = encodeURIComponent(m.id), tall = it.short;
+    player = `<div class="player yt${tall ? " tall" : ""}" data-yt="${esc(m.id)}">
+      <button class="poster" type="button" aria-label="تشغيل «${esc(titleOf(it))}»">
+        <img src="https://i.ytimg.com/vi/${v}/${tall ? "oar2" : "hq720"}.jpg" alt="" loading="eager" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${v}/hqdefault.jpg'">
+        <span class="play">${ico("play")}</span>${it.dur ? `<span class="pdur" dir="ltr">${arD(it.dur)}</span>` : ""}
+      </button></div>`;
+  }
   else if (m.type === "audio") player = `<div class="player audio"><audio controls preload="none" src="${esc(m.src)}"></audio></div>`;
   else if (m.type === "pdf") player = `<div class="player" style="aspect-ratio:3/4"><iframe src="${esc(m.src)}" title="${esc(it.title)}"></iframe></div>`;
   else if (m.type === "link") player = `<div class="player"><a class="btn-acc" href="${esc(m.href)}" target="_blank" rel="noopener">${ico("link")} فتح الرابط</a></div>`;
@@ -398,7 +405,11 @@ function viewLesson(id) {
     </article>
     <aside class="side"><div class="pane"><h3>${s ? (s.type === "program" ? "حلقات البرنامج" : "مجالس الكتاب") : "من " + esc(listPage[1])}</h3><ol class="rows">${sib.map(x => row(x, { chip: false, plain: true })).join("")}</ol></div></aside>
   </div></div>`);
-  $(`.side .row[data-id="${CSS.escape(id)}"]`)?.style.setProperty("border-color", "var(--acc)");
+  $(`.side .row[data-id="${CSS.escape(id)}"]`)?.classList.add("cur");
+  $(".player.yt .poster")?.addEventListener("click", e => {
+    const box = e.currentTarget.parentElement;
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(box.dataset.yt)}?autoplay=1&rel=0&playsinline=1" title="${esc(titleOf(it))}" allow="autoplay; accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  });
 }
 
 /* ---------- articles (المقالات) ---------- */

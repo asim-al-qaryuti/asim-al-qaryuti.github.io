@@ -192,10 +192,10 @@ mark{background:#E9DDB0;color:inherit;padding:0 2px}
 
 /* lesson page */
 .item-wrap{display:grid;grid-template-columns:1fr 320px;gap:30px;align-items:start}
-.player{aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);display:grid;place-items:center;align-content:center;gap:8px;color:var(--mute);overflow:hidden}
+.player{position:relative;aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);display:grid;place-items:center;align-content:center;gap:8px;color:var(--mute);overflow:hidden}
 .player .pi{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:var(--acc-ink)}
 .player .pi svg{width:24px;height:24px}
-.player iframe{width:100%;height:100%;border:0}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .player.audio{aspect-ratio:auto;padding:22px}
 .player audio{width:100%}
 .prose{font-size:24px;line-height:2;color:var(--ink-2)}
@@ -274,8 +274,8 @@ mark{background:#E9DDB0;color:inherit;padding:0 2px}
   body{font-size:20px}
   .hero{padding:40px 0 30px}
   .m-stats{gap:10px 26px}
-  .row{flex-wrap:wrap}
-  .ra{width:100%;padding-inline-start:42px}
+  .row{flex-wrap:nowrap}
+  .row .ra svg{width:18px;height:18px}
   .bhead{grid-template-columns:1fr 100px;gap:16px}
   .bgrid{grid-template-columns:repeat(2,1fr);gap:20px 14px}
 }
@@ -323,3 +323,22 @@ a.pill[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:
 .works{margin:0;padding-inline-start:1.4em;columns:2 340px;column-gap:40px;font-size:21px;line-height:1.75;color:var(--ink-2)}
 .works li{break-inside:avoid;margin-bottom:8px}
 .works li::marker{color:var(--acc);font-weight:700}
+
+/* video: poster first, the player loads on click */
+.player.yt{display:block;background:#1d1a17;border-color:transparent}
+.player.tall{aspect-ratio:9/16;max-width:min(400px,100%);max-height:80vh;margin-inline:auto}
+.poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
+.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.poster .play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:#fff;transition:transform .15s}
+.poster .play svg{width:30px;height:30px;margin-inline-start:4px}
+.poster:hover .play{transform:scale(1.06)}
+.poster .pdur{position:absolute;bottom:12px;left:12px;padding:1px 9px;border-radius:4px;background:rgba(0,0,0,.72);color:#fff;font-size:17px}
+/* list rows: the whole row opens the lesson */
+.row{position:relative;cursor:pointer;transition:background .12s}
+.row:hover{background:var(--surface)}
+.row .rt::after{content:"";position:absolute;inset:0}
+.row .mk,.row .chip,.row mark{position:relative;z-index:1}
+.row .ra{color:var(--mute);display:grid;place-items:center}
+.row .ra svg{width:20px;height:20px}
+.row:hover .ra{color:var(--acc)}
+.side .row.cur{background:var(--sunk)}
