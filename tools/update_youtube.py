@@ -107,7 +107,25 @@ def player(vid):
     body = {"context": {"client": {"clientName": "WEB", "clientVersion": CFG["ver"], "hl": "ar"}}, "videoId": vid}
     x = json.loads(http("https://www.youtube.com/youtubei/v1/player?prettyPrint=false", body))
     mf = x.get("microformat", {}).get("playerMicroformatRenderer", {}); vd = x.get("videoDetails", {})
-    return {"title": vd.get("title", ""), "date": (mf.get("publishDate") or "")[:10], "secs": int(vd.get("lengthSeconds") or 0), "desc": vd.get("shortDescription", "")}
+    return {"title": vd.get("title", ""), "date": (mf.get("publishDate") or "")[:10], "secs": int(vd.get("lengthSeconds") or 0),
+            "desc": vd.get("shortDescription", ""), "author": vd.get("author", ""), "channel": vd.get("channelId", "")}
+
+def search(q, pages=1, newest=False):
+    """بحث يوتيوب (newest=True: الأحدث أولًا)."""
+    ctx = {"client": {"clientName": "WEB", "clientVersion": CFG["ver"], "hl": "ar", "gl": "SA"}}
+    body = {"context": ctx, "query": q}
+    if newest: body["params"] = "CAI%3D"
+    d, out = json.loads(http("https://www.youtube.com/youtubei/v1/search?prettyPrint=false", body)), []
+    for _ in range(pages):
+        for v in walk(d, "videoRenderer"):
+            ch = (v.get("ownerText") or {}).get("runs", [{}])[0]
+            out.append({"id": v["videoId"], "title": txt(v.get("title")), "dur": txt(v.get("lengthText")),
+                        "chu": ch.get("navigationEndpoint", {}).get("browseEndpoint", {}).get("canonicalBaseUrl", "")})
+        toks = tokens(d)
+        if not toks: break
+        d = json.loads(http("https://www.youtube.com/youtubei/v1/search?prettyPrint=false", {"context": ctx, "continuation": toks[-1]}))
+        time.sleep(0.3)
+    return out
 
 def rss(channel):
     """أحدث 15 مقطعًا — احتياط موثوق إن تعذّر جلب صفحة القناة."""
@@ -161,6 +179,83 @@ def other_speaker(title, desc, rules):
         if re.search(p, t) or re.search(p, first): return True
     return any(w in t for w in rules.get("other_speaker_title_words", []))
 
+# ---------------------------------------------------------------- other channels
+def tidy_ext(t, raw):
+    """بقايا التوقيع في عناوين القنوات الأخرى: «… الشيخ د.» ، «… مع» ، «محاضرة للشيخ»."""
+    prev = None
+    while prev != t:
+        prev = t
+        t = re.sub(r"[\s\-–~/|:،,.]+(?:لل?شيخ|لشيخ|الشيخ|د\.?|أ\.?\s*د\.?|مع|حفظه الله|وفقه الله)[\s/.:]*$", "", t).strip()
+        t = re.sub(r"[\s\-–.]*(?:كلمة\s*)?د\.\s*عاصم\s+القريوتي$", "", t).strip()
+    if len(t) < 10:   # nothing left but the name: keep the original wording without the English half
+        t = re.split(r"\s+-\s+[A-Za-z]", BIDI.sub("", raw))[0].strip()
+    return t
+def is_sheikh(title, ext):
+    """عنوان مقطع من قناة أخرى: هل هو للشيخ نفسه (لا عنه)؟"""
+    t = BIDI.sub("", title or "")
+    if not re.search(ext["name_pattern"], t, re.I): return False
+    return not any(re.search(p, t, re.I) for p in ext.get("about_patterns", []))
+
+def collect_external(state, rules, full):
+    """دروس الشيخ ومحاضراته المنشورة في قنوات أخرى: بحث باسمه + قنوات وقوائم محددة."""
+    ext = rules.get("external")
+    if not ext: return 0
+    V, PL = state["videos"], state.setdefault("playlists", {})
+    STOP = {"الشيخ", "فضيلة", "لفضيلة", "عاصم", "القريوتي", "الدكتور", "بن", "عبدالله", "عبد", "الله", "شرح", "الدرس", "محاضرة", "في", "من", "على", "مع"}
+    words = lambda t: {w for w in norm(t).split() if len(w) > 2 and w not in STOP}
+    pool = [(norm(m["t"]), words(m["t"]), m.get("s", 0)) for v, m in V.items()]
+    ORD = ["اول", "ثاني", "ثالث", "رابع", "خامس", "سادس", "سابع", "ثامن", "تاسع", "عاشر"]
+    def epn(t):   # episode number in a title (digits or Arabic ordinal), if any
+        n = norm(t)
+        m = re.findall(r"\d+", n.translate(str.maketrans("٠١٢٣٤٥٦٧٨٩", "0123456789")))
+        if m: return m[-1]
+        for i, o in enumerate(ORD, 1):
+            if re.search(r"\bال" + o, n): return str(i)
+        return ""
+    def dup(t, secs):
+        """نفس المقطع إن تطابق العنوان، أو تقاربت المدة جدًا وتشابه العنوان ورقم الحلقة."""
+        n, w, e = norm(t), words(t), epn(t)
+        for n2, w2, s2 in pool:
+            if n == n2: return True
+            if not (secs and s2 and abs(secs - s2) <= max(4, secs * .02)): continue
+            if e and epn(n2) and e != epn(n2): continue
+            if w and w2 and len(w & w2) / min(len(w), len(w2)) > .75: return True
+        return False
+    skip_ch = set(ext.get("exclude_channels", []))
+    seen = set(state.setdefault("ext_dup", []))   # outside uploads already found to duplicate the library
+    cand = {}
+    def add(it, sure=False):
+        if it["id"] in V or it["id"] in seen or any(it.get("chu", "").endswith("/@" + c) for c in skip_ch): return
+        if sure or is_sheikh(it.get("title", ""), ext): cand.setdefault(it["id"], it)
+    for pl in ext.get("playlists", []):   # whole playlists of the sheikh (episode titles may lack his name)
+        try:
+            vids = crawl(f"https://www.youtube.com/playlist?list={pl['id']}&hl=ar")
+            PL[pl["id"]] = {"t": pl.get("t", ""), "v": [x["id"] for x in vids], "ext": 1}
+            for it in vids: add(it, sure=True)
+        except Exception as e: print("playlist failed", pl, e, file=sys.stderr)
+    for ch in ext.get("channels", []):
+        try:
+            for it in crawl(f"https://www.youtube.com/@{ch}/videos?hl=ar", pages=60 if full else 1): add(it)
+        except Exception as e: print("channel failed", ch, e, file=sys.stderr)
+    for q in ext.get("queries", []):
+        try:
+            for it in search(q, pages=12 if full else 2, newest=not full): add(it)
+        except Exception as e: print("search failed", q, e, file=sys.stderr)
+    added = 0
+    for vid, it in cand.items():
+        try: info = player(vid)
+        except Exception as e: print("player failed", vid, e, file=sys.stderr); continue
+        if not info["title"]: continue
+        t = tidy_ext(clean_title(info["title"]), info["title"])
+        if dup(t, info["secs"]):                         # already in the library (own channel or another upload)
+            state["ext_dup"].append(vid); continue
+        V[vid] = {"t": t, "d": info["date"], "s": info["secs"], "ext": info["author"]}
+        pool.append((norm(t), words(t), info["secs"]))
+        x = clean_desc(info["desc"], info["title"])
+        if x: V[vid]["x"] = x
+        added += 1; time.sleep(0.15)
+    return added
+
 # ---------------------------------------------------------------- state
 def load_state():
     if OUT_F.exists():
@@ -212,7 +307,7 @@ def collect(state, rules, full):
         if other_speaker(title, desc, rules): V[vid]["auto_ex"] = 1
         added += 1
         time.sleep(0.15)
-    return added
+    return added + collect_external(state, rules, full)
 
 # ---------------------------------------------------------------- build the library for the site
 ORDINALS = ["الأولى?|الاول", "الثاني|الثانية|الثاتي", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"]
@@ -220,7 +315,14 @@ ORDINALS = [f"(?:{w})" for w in ORDINALS]
 def build(state, rules):
     V, PL = state["videos"], state.get("playlists", {})
     ex, hold, inc = set(rules.get("exclude", [])), set(rules.get("hold", [])), set(rules.get("include", []))
-    visible = lambda v: v in V and (v in inc or (v not in ex and v not in hold and not V[v].get("auto_ex")))
+    ext_pl = {v for p in PL.values() if p.get("ext") for v in p["v"]}
+    ext_min = rules.get("external", {}).get("min_minutes", 15) * 60
+    def allowed(v):
+        if v not in V: return False
+        if v in inc: return True
+        return not (v in ex or v in hold or V[v].get("auto_ex"))
+    def visible(v):   # other channels: lessons, lectures and named programs only — not short clips
+        return allowed(v) and (not V[v].get("ext") or v in ext_pl or V[v].get("s", 0) >= ext_min)
     series, owner = [], {}
     for s in rules.get("series", []):
         items = []
@@ -228,7 +330,7 @@ def build(state, rules):
             for v in PL.get(pid, {}).get("v", []):
                 if v not in owner and v not in items: items.append(v)
         pats = [norm(m) for m in s.get("match", []) if norm(m)]
-        extra = [v for v in V if v not in owner and v not in items and any(p in norm(V[v]["t"]) for p in pats)]
+        extra = [v for v in V if v not in owner and v not in items and (s.get("ext") or not V[v].get("ext")) and any(p in norm(V[v]["t"]) for p in pats)]
         def epnum(v):
             t = V[v]["t"]
             m = re.search(r"(?:الحلقة|حلقة|المجلس|الدرس|\()\s*-?\s*(\d+)", t) or re.search(r"\b(\d{1,3})\b", t)
@@ -237,16 +339,17 @@ def build(state, rules):
                 if re.search(r"(?:الحلقة|المجلس|الدرس)\s+" + w, t): return i
             return 0
         items += sorted(extra, key=lambda v: (V[v].get("d", ""), epnum(v)))
-        items = [v for v in items if visible(v)]
+        items = [v for v in items if allowed(v)]   # inside a book/program, outside episodes of any length are fine
         if s["kind"] == "book" or s["id"] in ("hadith-fawaid", "aya", "rihab-quran"):
             items.sort(key=lambda v: (V[v].get("d", ""), epnum(v)))
         for v in items: owner[v] = s["id"]
         if items:
-            series.append({k: s[k] for k in ("id", "kind", "title", "author", "cat", "desc") if s.get(k)} | {"items": items})
+            series.append({k: s[k] for k in ("id", "kind", "title", "author", "cat", "desc", "src") if s.get(k)} | {"items": items})
     khutab, lectures, clips = [], [], []
     lec_min = rules.get("lecture_min_minutes", 15) * 60
     for v, m in sorted(V.items(), key=lambda kv: kv[1].get("d", ""), reverse=True):
         if v in owner or not visible(v): continue
+        if V[v].get("ext") and v in ext_pl and V[v].get("s", 0) < ext_min: continue   # episodes of an outside program show only inside it
         k = rules.get("kinds", {}).get(v)
         if not k:
             k = "khutbah" if "خطبة" in m["t"] else ("lecture" if m.get("s", 0) >= lec_min and not m.get("sh") else "clip")
@@ -270,7 +373,8 @@ def main():
     state = load_state()
     snap = lambda: json.dumps([state.get("videos", {}), state.get("lib", {})], sort_keys=True)
     before = snap()
-    added = collect(state, rules, full)
+    if "--external" in sys.argv: state.setdefault("videos", {}); added = collect_external(state, rules, True)
+    else: added = collect(state, rules, full)
     state["lib"] = build(state, rules)   # rules changes (exclude/include/series) apply on every run
     changed = snap() != before
     if changed or full or "--rebuild" in sys.argv or not OUT_F.exists():

@@ -307,3 +307,19 @@ mark{background:#E9DDB0;color:inherit;padding:0 2px}
 .m-name{line-height:1.35}
 .sec-h h2,.page-h h1,.cv-head h2{line-height:1.45}
 @media (max-width:760px){.cv-panel p{-webkit-line-clamp:2}.cv-panel h3{font-size:24px}}
+
+/* articles */
+.post .date{font-size:17px;color:var(--acc);font-weight:700}
+a.pill[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.prose h2{margin:1.4em 0 .5em;font:700 26px/1.5 var(--f-text);color:var(--ink)}
+.prose blockquote{margin:0 0 1em;padding:6px 18px;border-inline-start:3px solid var(--acc);background:var(--sunk);border-radius:var(--r)}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{border-bottom:1px solid var(--line)}
+.plist a{display:block;padding:9px 0;font-size:20px;line-height:1.5;color:var(--ink-2)}
+.plist a:hover{color:var(--acc)}
+.more-l{display:inline-block;margin-top:12px;color:var(--acc);font-weight:700}
+.src-link a{display:inline-flex;align-items:center;gap:6px;color:var(--acc);font-size:19px}
+.res-h{margin:6px 0 12px;font:700 24px var(--f-head)}
+.works{margin:0;padding-inline-start:1.4em;columns:2 340px;column-gap:40px;font-size:21px;line-height:1.75;color:var(--ink-2)}
+.works li{break-inside:avoid;margin-bottom:8px}
+.works li::marker{color:var(--acc);font-weight:700}
