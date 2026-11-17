@@ -1,702 +1,812 @@
 {
-  "_note": "قواعد جلب مقاطع قناة الشيخ من يوتيوب. exclude: مقاطع لا تظهر أبدًا (ليست للشيخ). hold: مقاطع مخفية حتى تُراجع؛ انقلها إلى include لإظهارها. include: تظهر حتى لو طابقت قاعدة الاستبعاد. series: الكتب والبرامج (قوائم التشغيل أو كلمات في العنوان).",
-  "channel_handle": "alqaryoti",
-  "lecture_min_minutes": 15,
-  "exclude": [
-    "gcJbX9k2aH4",
-    "M_282vd2uP4",
-    "BYBqX77YNFU",
-    "BpXMfhESm1A",
-    "J8QO4r9YO6s",
-    "y8hsoXHc2L4",
-    "JDKIVhwIiEc",
-    "9eAcp6RocDg",
-    "OuF-9RlZIxA",
-    "cj5ZydG9-hk",
-    "wpb3eiKEsuY",
-    "UmLUpyouyF8",
-    "3cpjgEruzgI",
-    "DOoX3bbkDbU",
-    "0zq-gfTdy0Y",
-    "2Z2EmkhkR6g",
-    "6c8X6oyWNVE",
-    "c3HM5v0uUV0",
-    "uslKyO8Hsj8",
-    "YqsIDGLAVfM",
-    "xnQNwXNhr4g",
-    "vRDjB73zy90",
-    "tUawtR9V0BE",
-    "mdrsyjMReEE",
-    "v7PBalDXVPI",
-    "BHqj6v6yfoc",
-    "qB_w6EAZIIc",
-    "ULd-gHwmaQw",
-    "0BJGWykYQXY",
-    "iumrkUUU0_o",
-    "qGuMUej9WIU",
-    "CM5lf_Vb5WQ",
-    "6nXHF0OUpvg",
-    "x2BqHym5K0I",
-    "DS5RrsytdFE",
-    "EaRi93Eip7s",
-    "ZWxmPRMRq2o",
-    "pXG_wrs9T38"
-  ],
-  "hold": [
-    "O-ZHHX6fin0",
-    "qka2GqS0iQk",
-    "llTek9ZWLUc",
-    "DpI-5mZX79s",
-    "i9ggIuxo1NA",
-    "6ecsvHnZ8Qo",
-    "e4I23hfm1Hw",
-    "3yZ6cpsKTzQ",
-    "RXCXMR0F_pY",
-    "CPyL6yZJus8",
-    "6TZmMy9rRNI",
-    "gAfi4cCQqCg",
-    "EtnWBgvJKMU",
-    "ANBUkJKubCo",
-    "htrmXO9u2Rw",
-    "hAAE2-LO3ag"
-  ],
-  "include": [],
-  "kinds": {},
-  "other_speaker_patterns": [
-    "(?<!\\S)(لفضيلة|لمعالي|لسماحة|سماحة|معالي|للعلامة|للشيخ|للدكتور)\\s",
-    "(?<!\\S)فضيلة الشيخ\\s"
-  ],
-  "other_speaker_title_words": [
-    "قصيدة",
-    "تلاوة",
-    "نشيد",
-    "أنشودة"
-  ],
-  "series": [
-    {
-      "id": "riyad",
-      "kind": "book",
-      "title": "شرح رياض الصالحين",
-      "author": "الإمام النووي",
-      "cat": "adab",
-      "playlists": [
-        "PLzRCYMG4mggQsj1fjihJiuV1DEh0auDSq"
-      ],
-      "match": [
-        "رياض الصالحين قراءة وتعليق",
-        "قراءة وتعليق في رياض الصالحين"
-      ]
-    },
-    {
-      "id": "nukhba",
-      "kind": "book",
-      "title": "شرح نخبة الفكر",
-      "author": "الحافظ ابن حجر",
-      "cat": "hadith",
-      "playlists": [
-        "PLzRCYMG4mggTuGo1cV9AiZWyFaCuVnYbN"
-      ],
-      "match": [
-        "نخبة الفكر"
-      ]
-    },
-    {
-      "id": "ijtima",
-      "kind": "book",
-      "title": "رسالة في الحث على اجتماع كلمة المسلمين وذم التفرق والاختلاف",
-      "cat": "manhaj",
-      "playlists": [],
-      "match": [
-        "اجتماع كلمة المسلمين"
-      ]
-    },
-    {
-      "id": "arbaun-ahkam",
-      "kind": "book",
-      "title": "شرح الأربعين في الأحكام",
-      "author": "الحافظ المنذري",
-      "cat": "fiqh",
-      "playlists": [],
-      "match": [
-        "الأربعون في الأحكام",
-        "الأربعين في الأحكام"
-      ]
-    },
-    {
-      "id": "aya",
-      "kind": "program",
-      "title": "آية وتدبر",
-      "playlists": [
-        "PLzRCYMG4mggSs1zH9sUVzrI8HCY47-CmW"
-      ],
-      "match": [
-        "آية وتدبر",
-        "آية من كتاب الله تدبر"
-      ]
-    },
-    {
-      "id": "hadith-fawaid",
-      "kind": "program",
-      "title": "حديث وفوائد",
-      "playlists": [
-        "PLzRCYMG4mggS_lF1xJgPSX2SYw6uxSpMd"
-      ],
-      "match": [
-        "حديث وفوائد",
-        "حديث و فوائد"
-      ]
-    },
-    {
-      "id": "adab",
-      "kind": "program",
-      "title": "أحاديث الآداب",
-      "playlists": [
-        "PLzRCYMG4mggStLmPu26e3DhM2AFS4LQBs"
-      ],
-      "match": [
-        "أحاديث الآداب"
-      ]
-    },
-    {
-      "id": "bayt",
-      "kind": "program",
-      "title": "في بيت النبوة",
-      "playlists": [
-        "PLzRCYMG4mggTSYlmadgrvjcZn0IcdV-Du"
-      ],
-      "match": [
-        "في بيت النبوة"
-      ]
-    },
-    {
-      "id": "ibra",
-      "kind": "program",
-      "title": "قصة وعبرة",
-      "playlists": [
-        "PLzRCYMG4mggT2cKBGOcQxw1l3mo80ahNd",
-        "PLzRCYMG4mggRg2E-I2pkMD8MQeRTnOD4o"
-      ],
-      "match": [
-        "قصة وعبرة"
-      ]
-    },
-    {
-      "id": "hikma",
-      "kind": "program",
-      "title": "الحكمة",
-      "playlists": [
-        "PLzRCYMG4mggTUl2S_9BeWzw0doezCOokh",
-        "PLzRCYMG4mggR-92bAvYjJLqgOF-WJhecv"
-      ],
-      "match": []
-    },
-    {
-      "id": "khair",
-      "kind": "program",
-      "title": "خيرٌ أملا",
-      "playlists": [
-        "PLzRCYMG4mggT1O9FDj_rAFOnRiQkP5GI2",
-        "PLzRCYMG4mggSGffMse2dg-D9YGcJ1YnoN"
-      ],
-      "match": [
-        "خير أملا"
-      ]
-    },
-    {
-      "id": "rihab-quran",
-      "kind": "program",
-      "title": "في رحاب القرآن",
-      "playlists": [],
-      "match": [
-        "في رحاب القرآن"
-      ]
-    },
-    {
-      "id": "azama",
-      "kind": "program",
-      "title": "عظمة الله في خلق أعضاء الإنسان",
-      "playlists": [
-        "PLzRCYMG4mggTtK0JVwUR4aFzKFic2WwS1"
-      ],
-      "match": [
-        "عظمة خلق الله لأعضاء الإنسان"
-      ]
-    },
-    {
-      "id": "hikam-quran",
-      "kind": "program",
-      "title": "حِكَم إنزال القرآن الكريم",
-      "playlists": [
-        "PLzRCYMG4mggRdDiNl6Cut8KI7h3MJ7-UC"
-      ],
-      "match": []
-    },
-    {
-      "id": "anwar-sunna",
-      "kind": "program",
-      "title": "أنوار السنة",
-      "playlists": [
-        "PLzRCYMG4mggTptP4TM6LeMotbAtc_9M1c"
-      ],
-      "match": []
-    },
-    {
-      "id": "anwar-quran",
-      "kind": "program",
-      "title": "أنوار القرآن والسنة",
-      "playlists": [
-        "PLzRCYMG4mggT3lcOM4gt_DMUcj4ugkqSg"
-      ],
-      "match": []
-    },
-    {
-      "id": "masabih",
-      "kind": "program",
-      "title": "مصابيح الأمل",
-      "playlists": [
-        "PLzRCYMG4mggQcE2Dnr2BSiNnH9WIAKRH0"
-      ],
-      "match": []
-    },
-    {
-      "id": "haq-muslim",
-      "kind": "program",
-      "title": "حق المسلم على المسلم",
-      "playlists": [
-        "PLzRCYMG4mggS8kq8sVJTq2X_aT2Ori-hE"
-      ],
-      "match": []
-    },
-    {
-      "id": "intiqaat",
-      "kind": "program",
-      "title": "انتقاءات",
-      "playlists": [
-        "PLzRCYMG4mggTjjglzQSBvYCo4cwIMYDjP"
-      ],
-      "match": []
-    },
-    {
-      "id": "mukhtarat",
-      "kind": "program",
-      "title": "مختارات",
-      "playlists": [
-        "PLzRCYMG4mggTrApQeo-7q4ABbB-oG9360"
-      ],
-      "match": [
-        "مختارات |"
-      ]
-    },
-    {
-      "id": "dakhal",
-      "kind": "program",
-      "title": "دخل الجنة",
-      "playlists": [],
-      "match": [
-        "دخل الجنة"
-      ]
-    },
-    {
-      "id": "nidaat",
-      "kind": "program",
-      "title": "نداءات رب الناس لكافة الناس",
-      "playlists": [],
-      "match": [
-        "نداءات رب الناس"
-      ]
-    },
-    {
-      "id": "rihab-ilm",
-      "kind": "program",
-      "title": "في رحاب العلم والعلماء",
-      "playlists": [
-        "PL3C846A073369CD68"
-      ],
-      "match": [
-        "في رحاب العلم والعلماء"
-      ]
-    },
-    {
-      "id": "mutamirin",
-      "kind": "program",
-      "title": "محاضرات لشباب معتمرين من الغرب",
-      "playlists": [],
-      "match": [
-        "محاضرات لشباب معتمرين"
-      ]
-    },
-    {
-      "id": "riyad-fawaid",
-      "kind": "program",
-      "title": "فوائد من شرح رياض الصالحين",
-      "playlists": [
-        "PLzRCYMG4mggShGzBNygcT48PbCIhZWrqB"
-      ],
-      "match": [
-        "فوائد ملتقطة من شرح رياض الصالحين"
-      ]
-    },
-    {
-      "id": "aya-fawaid",
-      "kind": "program",
-      "title": "فوائد من برنامج آية وتدبر",
-      "playlists": [
-        "PLzRCYMG4mggTkMr4dKyohWRvPUZg0WRvJ"
-      ],
-      "match": []
-    }
-  ],
-  "topics": [
-    {
-      "id": "ramadan",
-      "title": "رمضان والصيام",
-      "words": [
-        "رمضان",
-        "صيام",
-        "الصيام",
-        "صوم",
-        "الصوم",
-        "شوال",
-        "عاشوراء",
-        "السحور",
-        "رمضانيه",
-        "التراويح",
-        "الافطار",
-        "ليله القدر",
-        "يصوم",
-        "الصائم"
-      ]
-    },
-    {
-      "id": "seasons",
-      "title": "الحج والمواسم",
-      "words": [
-        "الحج",
-        "العمره",
-        "العشر",
-        "ذي الحجه",
-        "الاضحي",
-        "العيد",
-        "عيد",
-        "الاضحيه",
-        "المحرم",
-        "شعبان",
-        "المولد",
-        "رجب",
-        "الهالوين",
-        "بابا نويل",
-        "الفلانتاين",
-        "التكبير",
-        "عرفه",
-        "يوم النحر",
-        "التشريق",
-        "بالعيد"
-      ]
-    },
-    {
-      "id": "salah",
-      "title": "الصلاة والطهارة",
-      "words": [
-        "الصلاه",
-        "صلاه",
-        "الصلوات",
-        "المساجد",
-        "المسجد",
-        "الجماعه",
-        "الوضوء",
-        "الطهاره",
-        "الاذان",
-        "اذن",
-        "الفجر",
-        "المصلين",
-        "ركعتي",
-        "ركعات"
-      ]
-    },
-    {
-      "id": "aqeedah",
-      "title": "العقيده والتوحيد",
-      "words": [
-        "التوحيد",
-        "الشرك",
-        "العقيده",
-        "الاعتقاد",
-        "الايمان",
-        "اسماء الله",
-        "صفات",
-        "الالحاد",
-        "البريلويه",
-        "الاشاعره",
-        "البدعه",
-        "بدعه",
-        "الغلو",
-        "التكفير",
-        "الله فاعبد",
-        "القبور",
-        "الصوفيه",
-        "الابتداع",
-        "كمال دين",
-        "التحميد",
-        "الحمد لله"
-      ]
-    },
-    {
-      "id": "manhaj",
-      "title": "المنهج والفتن",
-      "words": [
-        "السلفيه",
-        "السلف",
-        "منهج",
-        "المنهج",
-        "الوهابيه",
-        "الفتن",
-        "الخوارج",
-        "الدواعش",
-        "التفرق",
-        "الاختلاف",
-        "التطرف",
-        "الغدر",
-        "القتل",
-        "ثارنا"
-      ]
-    },
-    {
-      "id": "sunnah",
-      "title": "السنة والحديث",
-      "words": [
-        "السنه",
-        "الحديث",
-        "حديث",
-        "الاحاديث",
-        "المسلسل",
-        "الاسناد",
-        "البخاري",
-        "المحدث",
-        "السنن",
-        "الموطا",
-        "النصوص",
-        "المتبعين"
-      ]
-    },
-    {
-      "id": "quran",
-      "title": "القرآن والتفسير",
-      "words": [
-        "القران",
-        "سوره",
-        "ايه",
-        "ايات",
-        "تفسير",
-        "قرانيه",
-        "الفاتحه",
-        "تدبر",
-        "تلاوه"
-      ]
-    },
-    {
-      "id": "seerah",
-      "title": "السيرة والصحابة",
-      "words": [
-        "السيره",
-        "شمائل",
-        "هدي النبي",
-        "المصطفي",
-        "الصحابه",
-        "الصحابي",
-        "رضي الله عنه",
-        "رضي الله عنهما",
-        "ابي بكر",
-        "ابو بكر",
-        "سلمان",
-        "ابي الدرداء",
-        "فاطمه",
-        "خديجه",
-        "بيت النبوه",
-        "سيره",
-        "رسول الله",
-        "صلوا علي النبي"
-      ]
-    },
-    {
-      "id": "ulama",
-      "title": "العلماء وطلب العلم",
-      "words": [
-        "العلماء",
-        "الالباني",
-        "ابن باز",
-        "ابن تيميه",
-        "طلب العلم",
-        "طلاب العلم",
-        "التفقه",
-        "الكتب",
-        "كتب",
-        "الامام احمد",
-        "الشافعي",
-        "شيخ الاسلام",
-        "مجالس السماع",
-        "التعلم",
-        "العالم",
-        "علماء"
-      ]
-    },
-    {
-      "id": "family",
-      "title": "الأسرة والمرأة",
-      "words": [
-        "الزوجين",
-        "الزوج",
-        "الزوجه",
-        "المراه",
-        "النسويه",
-        "الذكوريه",
-        "اولادنا",
-        "الاولاد",
-        "الوالدين",
-        "الاسره",
-        "الجار",
-        "الارحام",
-        "النكاح",
-        "الزواج",
-        "الاحفاد",
-        "اسري"
-      ]
-    },
-    {
-      "id": "dawah",
-      "title": "الدعوة والمهتدون",
-      "words": [
-        "اسلامه",
-        "اسلم",
-        "دخل في الاسلام",
-        "النصرانيه",
-        "المهتدين",
-        "الالحاد الي",
-        "new muslim",
-        "revert",
-        "الدعوه",
-        "داعيه",
-        "الداخلين في الاسلام",
-        "المستقبل للاسلام",
-        "فهل انتم مسلمون"
-      ]
-    },
-    {
-      "id": "modern",
-      "title": "قضايا معاصرة",
-      "words": [
-        "كورونا",
-        "الوباء",
-        "الذكاء الصناعي",
-        "الاقتصادي",
-        "الطب",
-        "التطعيم",
-        "اللقاح",
-        "الجوال",
-        "ارطغرل",
-        "شارلي",
-        "الحريات",
-        "الشذوذ",
-        "المثليه",
-        "المذياع",
-        "التلفاز"
-      ]
-    },
-    {
-      "id": "kawn",
-      "title": "التفكر في آيات الله",
-      "words": [
-        "خلق",
-        "الجبال",
-        "بحيره",
-        "الابل",
-        "الاشجار",
-        "التفكر",
-        "الكون",
-        "المطر",
-        "البحر",
-        "الطبيعه"
-      ]
-    },
-    {
-      "id": "fiqh",
-      "title": "الفقه والأحكام",
-      "words": [
-        "حكم",
-        "احكام",
-        "الفقه",
-        "الفتوي",
-        "فتوي",
-        "اكل",
-        "لحم",
-        "الجلاله",
-        "مباح",
-        "يجوز",
-        "الاعتصامات",
-        "الاضرابات",
-        "حقوق شرعيه",
-        "الطائره",
-        "السائقي",
-        "مذهب"
-      ]
-    },
-    {
-      "id": "akhlaq",
-      "title": "الأخلاق والرقائق",
-      "words": [
-        "الاخلاق",
-        "اداب",
-        "الادب",
-        "الصبر",
-        "الشكر",
-        "شكرا",
-        "التوبه",
-        "الدعاء",
-        "الذكر",
-        "السعاده",
-        "الرحمه",
-        "الاخلاص",
-        "القلوب",
-        "الموت",
-        "الاخره",
-        "الجنه",
-        "النار",
-        "نصيحه",
-        "همسه",
-        "همسات",
-        "العافيه",
-        "التقوي",
-        "الاستقامه",
-        "البخل",
-        "الكرم",
-        "الصدقه",
-        "الوالدان",
-        "الوالدين",
-        "قدوه",
-        "الرزق",
-        "التنافس",
-        "الجليس",
-        "الشهوات",
-        "النفس",
-        "المزاح",
-        "الحب",
-        "الاخوه",
-        "الوحده",
-        "الامر بالمعروف",
-        "الاستجابه",
-        "دعوت",
-        "احتسابا",
-        "العمل",
-        "دعوات",
-        "شره"
-      ]
-    }
-  ],
-  "topic_english": {
-    "id": "langs",
-    "title": "بلغات أخرى"
+ "_note": "قواعد جلب مقاطع قناة الشيخ من يوتيوب. exclude: مقاطع لا تظهر أبدًا (ليست للشيخ). hold: مقاطع مخفية حتى تُراجع؛ انقلها إلى include لإظهارها. include: تظهر حتى لو طابقت قاعدة الاستبعاد. series: الكتب والبرامج (قوائم التشغيل أو كلمات في العنوان).",
+ "channel_handle": "alqaryoti",
+ "lecture_min_minutes": 15,
+ "exclude": [
+  "gcJbX9k2aH4",
+  "M_282vd2uP4",
+  "BYBqX77YNFU",
+  "BpXMfhESm1A",
+  "J8QO4r9YO6s",
+  "y8hsoXHc2L4",
+  "JDKIVhwIiEc",
+  "9eAcp6RocDg",
+  "OuF-9RlZIxA",
+  "cj5ZydG9-hk",
+  "wpb3eiKEsuY",
+  "UmLUpyouyF8",
+  "3cpjgEruzgI",
+  "DOoX3bbkDbU",
+  "0zq-gfTdy0Y",
+  "2Z2EmkhkR6g",
+  "6c8X6oyWNVE",
+  "c3HM5v0uUV0",
+  "uslKyO8Hsj8",
+  "YqsIDGLAVfM",
+  "xnQNwXNhr4g",
+  "vRDjB73zy90",
+  "tUawtR9V0BE",
+  "mdrsyjMReEE",
+  "v7PBalDXVPI",
+  "BHqj6v6yfoc",
+  "qB_w6EAZIIc",
+  "ULd-gHwmaQw",
+  "0BJGWykYQXY",
+  "iumrkUUU0_o",
+  "qGuMUej9WIU",
+  "CM5lf_Vb5WQ",
+  "6nXHF0OUpvg",
+  "x2BqHym5K0I",
+  "DS5RrsytdFE",
+  "EaRi93Eip7s",
+  "ZWxmPRMRq2o",
+  "pXG_wrs9T38",
+  "XInON9GL4a0",
+  "9pe84bUvSjc",
+  "8hMgNBD11z4",
+  "tkonnt4HI10",
+  "uM8U5H7oZXE",
+  "-728MkI2_nQ",
+  "4GSLnJSs-is"
+ ],
+ "hold": [
+  "O-ZHHX6fin0",
+  "qka2GqS0iQk",
+  "llTek9ZWLUc",
+  "DpI-5mZX79s",
+  "i9ggIuxo1NA",
+  "6ecsvHnZ8Qo",
+  "e4I23hfm1Hw",
+  "3yZ6cpsKTzQ",
+  "RXCXMR0F_pY",
+  "CPyL6yZJus8",
+  "6TZmMy9rRNI",
+  "gAfi4cCQqCg",
+  "EtnWBgvJKMU",
+  "ANBUkJKubCo",
+  "htrmXO9u2Rw",
+  "hAAE2-LO3ag"
+ ],
+ "include": [],
+ "kinds": {},
+ "other_speaker_patterns": [
+  "(?<!\\S)(لفضيلة|لمعالي|لسماحة|سماحة|معالي|للعلامة|للشيخ|للدكتور)\\s",
+  "(?<!\\S)فضيلة الشيخ\\s"
+ ],
+ "other_speaker_title_words": [
+  "قصيدة",
+  "تلاوة",
+  "نشيد",
+  "أنشودة"
+ ],
+ "series": [
+  {
+   "id": "riyad",
+   "kind": "book",
+   "title": "شرح رياض الصالحين",
+   "author": "الإمام النووي",
+   "cat": "adab",
+   "playlists": [
+    "PLzRCYMG4mggQsj1fjihJiuV1DEh0auDSq"
+   ],
+   "match": [
+    "رياض الصالحين قراءة وتعليق",
+    "قراءة وتعليق في رياض الصالحين"
+   ]
   },
-  "topic_other": {
-    "id": "other",
-    "title": "متفرقات"
+  {
+   "id": "nukhba",
+   "kind": "book",
+   "title": "شرح نخبة الفكر",
+   "author": "الحافظ ابن حجر",
+   "cat": "hadith",
+   "playlists": [
+    "PLzRCYMG4mggTuGo1cV9AiZWyFaCuVnYbN"
+   ],
+   "match": [
+    "نخبة الفكر"
+   ]
+  },
+  {
+   "id": "ijtima",
+   "kind": "book",
+   "title": "رسالة في الحث على اجتماع كلمة المسلمين وذم التفرق والاختلاف",
+   "cat": "manhaj",
+   "playlists": [],
+   "match": [
+    "اجتماع كلمة المسلمين"
+   ]
+  },
+  {
+   "id": "arbaun-ahkam",
+   "kind": "book",
+   "title": "شرح الأربعين في الأحكام",
+   "author": "الحافظ المنذري",
+   "cat": "fiqh",
+   "playlists": [],
+   "match": [
+    "الأربعون في الأحكام",
+    "الأربعين في الأحكام"
+   ]
+  },
+  {
+   "id": "aya",
+   "kind": "program",
+   "title": "آية وتدبر",
+   "playlists": [
+    "PLzRCYMG4mggSs1zH9sUVzrI8HCY47-CmW"
+   ],
+   "match": [
+    "آية وتدبر",
+    "آية من كتاب الله تدبر"
+   ]
+  },
+  {
+   "id": "hadith-fawaid",
+   "kind": "program",
+   "title": "حديث وفوائد",
+   "playlists": [
+    "PLzRCYMG4mggS_lF1xJgPSX2SYw6uxSpMd"
+   ],
+   "match": [
+    "حديث وفوائد",
+    "حديث و فوائد"
+   ]
+  },
+  {
+   "id": "adab",
+   "kind": "program",
+   "title": "أحاديث الآداب",
+   "playlists": [
+    "PLzRCYMG4mggStLmPu26e3DhM2AFS4LQBs"
+   ],
+   "match": [
+    "أحاديث الآداب"
+   ]
+  },
+  {
+   "id": "bayt",
+   "kind": "program",
+   "title": "في بيت النبوة",
+   "playlists": [
+    "PLzRCYMG4mggTSYlmadgrvjcZn0IcdV-Du"
+   ],
+   "match": [
+    "في بيت النبوة"
+   ]
+  },
+  {
+   "id": "ibra",
+   "kind": "program",
+   "title": "قصة وعبرة",
+   "playlists": [
+    "PLzRCYMG4mggT2cKBGOcQxw1l3mo80ahNd",
+    "PLzRCYMG4mggRg2E-I2pkMD8MQeRTnOD4o"
+   ],
+   "match": [
+    "قصة وعبرة"
+   ]
+  },
+  {
+   "id": "hikma",
+   "kind": "program",
+   "title": "الحكمة",
+   "playlists": [
+    "PLzRCYMG4mggTUl2S_9BeWzw0doezCOokh",
+    "PLzRCYMG4mggR-92bAvYjJLqgOF-WJhecv"
+   ],
+   "match": []
+  },
+  {
+   "id": "khair",
+   "kind": "program",
+   "title": "خيرٌ أملا",
+   "playlists": [
+    "PLzRCYMG4mggT1O9FDj_rAFOnRiQkP5GI2",
+    "PLzRCYMG4mggSGffMse2dg-D9YGcJ1YnoN"
+   ],
+   "match": [
+    "خير أملا"
+   ]
+  },
+  {
+   "id": "rihab-quran",
+   "kind": "program",
+   "title": "في رحاب القرآن",
+   "playlists": [],
+   "match": [
+    "في رحاب القرآن"
+   ]
+  },
+  {
+   "id": "azama",
+   "kind": "program",
+   "title": "عظمة الله في خلق أعضاء الإنسان",
+   "playlists": [
+    "PLzRCYMG4mggTtK0JVwUR4aFzKFic2WwS1"
+   ],
+   "match": [
+    "عظمة خلق الله لأعضاء الإنسان"
+   ]
+  },
+  {
+   "id": "hikam-quran",
+   "kind": "program",
+   "title": "حِكَم إنزال القرآن الكريم",
+   "playlists": [
+    "PLzRCYMG4mggRdDiNl6Cut8KI7h3MJ7-UC"
+   ],
+   "match": []
+  },
+  {
+   "id": "anwar-sunna",
+   "kind": "program",
+   "title": "أنوار السنة",
+   "playlists": [
+    "PLzRCYMG4mggTptP4TM6LeMotbAtc_9M1c"
+   ],
+   "match": []
+  },
+  {
+   "id": "anwar-quran",
+   "kind": "program",
+   "title": "أنوار القرآن والسنة",
+   "playlists": [
+    "PLzRCYMG4mggT3lcOM4gt_DMUcj4ugkqSg"
+   ],
+   "match": [
+    "أنوار القرآن والسنّة |",
+    "أنوار القرآن والسنة |"
+   ],
+   "ext": true
+  },
+  {
+   "id": "masabih",
+   "kind": "program",
+   "title": "مصابيح الأمل",
+   "playlists": [
+    "PLzRCYMG4mggQcE2Dnr2BSiNnH9WIAKRH0"
+   ],
+   "match": []
+  },
+  {
+   "id": "haq-muslim",
+   "kind": "program",
+   "title": "حق المسلم على المسلم",
+   "playlists": [
+    "PLzRCYMG4mggS8kq8sVJTq2X_aT2Ori-hE"
+   ],
+   "match": []
+  },
+  {
+   "id": "intiqaat",
+   "kind": "program",
+   "title": "انتقاءات",
+   "playlists": [
+    "PLzRCYMG4mggTjjglzQSBvYCo4cwIMYDjP"
+   ],
+   "match": []
+  },
+  {
+   "id": "mukhtarat",
+   "kind": "program",
+   "title": "مختارات",
+   "playlists": [
+    "PLzRCYMG4mggTrApQeo-7q4ABbB-oG9360"
+   ],
+   "match": [
+    "مختارات |"
+   ]
+  },
+  {
+   "id": "dakhal",
+   "kind": "program",
+   "title": "دخل الجنة",
+   "playlists": [],
+   "match": [
+    "دخل الجنة"
+   ]
+  },
+  {
+   "id": "nidaat",
+   "kind": "program",
+   "title": "نداءات رب الناس لكافة الناس",
+   "playlists": [],
+   "match": [
+    "نداءات رب الناس"
+   ]
+  },
+  {
+   "id": "rihab-ilm",
+   "kind": "program",
+   "title": "في رحاب العلم والعلماء",
+   "playlists": [
+    "PL3C846A073369CD68"
+   ],
+   "match": [
+    "في رحاب العلم والعلماء"
+   ]
+  },
+  {
+   "id": "mutamirin",
+   "kind": "program",
+   "title": "محاضرات لشباب معتمرين من الغرب",
+   "playlists": [],
+   "match": [
+    "محاضرات لشباب معتمرين"
+   ]
+  },
+  {
+   "id": "riyad-fawaid",
+   "kind": "program",
+   "title": "فوائد من شرح رياض الصالحين",
+   "playlists": [
+    "PLzRCYMG4mggShGzBNygcT48PbCIhZWrqB"
+   ],
+   "match": [
+    "فوائد ملتقطة من شرح رياض الصالحين"
+   ]
+  },
+  {
+   "id": "aya-fawaid",
+   "kind": "program",
+   "title": "فوائد من برنامج آية وتدبر",
+   "playlists": [
+    "PLzRCYMG4mggTkMr4dKyohWRvPUZg0WRvJ"
+   ],
+   "match": []
+  },
+  {
+   "id": "thulathiyat",
+   "kind": "book",
+   "title": "شرح ثلاثيات صحيح الإمام البخاري",
+   "author": "الإمام البخاري",
+   "ext": true,
+   "playlists": [
+    "PLtoKkuIsBihBwEzhd-cYmstGQlXxYahrU"
+   ],
+   "match": [
+    "ثلاثيات صحيح الإمام البخاري",
+    "شرح ثلاثيات صحيح البخاري",
+    "دورة في شرح ثلاثيات"
+   ],
+   "cat": "hadith"
+  },
+  {
+   "id": "muwatta-siyam",
+   "kind": "book",
+   "title": "شرح كتاب الصيام من موطأ الإمام مالك",
+   "author": "الإمام مالك",
+   "ext": true,
+   "playlists": [
+    "PLtoKkuIsBihBoZqLjGcSlcVsgJdKM4Qng"
+   ],
+   "match": [
+    "كتاب الصيام من موطأ",
+    "كتاب الصيام - موطأ",
+    "كتاب الصيام موطأ"
+   ],
+   "cat": "fiqh"
+  },
+  {
+   "id": "adab-taallum",
+   "kind": "course",
+   "title": "آداب التعلم والتفقه",
+   "desc": "دورة شرح المتون العلمية — مركز الإمام الألباني",
+   "ext": true,
+   "match": [
+    "آداب التعلم والتفقه"
+   ]
   }
+ ],
+ "topics": [
+  {
+   "id": "ramadan",
+   "title": "رمضان والصيام",
+   "words": [
+    "رمضان",
+    "صيام",
+    "الصيام",
+    "صوم",
+    "الصوم",
+    "شوال",
+    "عاشوراء",
+    "السحور",
+    "رمضانيه",
+    "التراويح",
+    "الافطار",
+    "ليله القدر",
+    "يصوم",
+    "الصائم"
+   ]
+  },
+  {
+   "id": "seasons",
+   "title": "الحج والمواسم",
+   "words": [
+    "الحج",
+    "العمره",
+    "العشر",
+    "ذي الحجه",
+    "الاضحي",
+    "العيد",
+    "عيد",
+    "الاضحيه",
+    "المحرم",
+    "شعبان",
+    "المولد",
+    "رجب",
+    "الهالوين",
+    "بابا نويل",
+    "الفلانتاين",
+    "التكبير",
+    "عرفه",
+    "يوم النحر",
+    "التشريق",
+    "بالعيد"
+   ]
+  },
+  {
+   "id": "salah",
+   "title": "الصلاة والطهارة",
+   "words": [
+    "الصلاه",
+    "صلاه",
+    "الصلوات",
+    "المساجد",
+    "المسجد",
+    "الجماعه",
+    "الوضوء",
+    "الطهاره",
+    "الاذان",
+    "اذن",
+    "الفجر",
+    "المصلين",
+    "ركعتي",
+    "ركعات"
+   ]
+  },
+  {
+   "id": "aqeedah",
+   "title": "العقيده والتوحيد",
+   "words": [
+    "التوحيد",
+    "الشرك",
+    "العقيده",
+    "الاعتقاد",
+    "الايمان",
+    "اسماء الله",
+    "صفات",
+    "الالحاد",
+    "البريلويه",
+    "الاشاعره",
+    "البدعه",
+    "بدعه",
+    "الغلو",
+    "التكفير",
+    "الله فاعبد",
+    "القبور",
+    "الصوفيه",
+    "الابتداع",
+    "كمال دين",
+    "التحميد",
+    "الحمد لله"
+   ]
+  },
+  {
+   "id": "manhaj",
+   "title": "المنهج والفتن",
+   "words": [
+    "السلفيه",
+    "السلف",
+    "منهج",
+    "المنهج",
+    "الوهابيه",
+    "الفتن",
+    "الخوارج",
+    "الدواعش",
+    "التفرق",
+    "الاختلاف",
+    "التطرف",
+    "الغدر",
+    "القتل",
+    "ثارنا"
+   ]
+  },
+  {
+   "id": "sunnah",
+   "title": "السنة والحديث",
+   "words": [
+    "السنه",
+    "الحديث",
+    "حديث",
+    "الاحاديث",
+    "المسلسل",
+    "الاسناد",
+    "البخاري",
+    "المحدث",
+    "السنن",
+    "الموطا",
+    "النصوص",
+    "المتبعين"
+   ]
+  },
+  {
+   "id": "quran",
+   "title": "القرآن والتفسير",
+   "words": [
+    "القران",
+    "سوره",
+    "ايه",
+    "ايات",
+    "تفسير",
+    "قرانيه",
+    "الفاتحه",
+    "تدبر",
+    "تلاوه"
+   ]
+  },
+  {
+   "id": "seerah",
+   "title": "السيرة والصحابة",
+   "words": [
+    "السيره",
+    "شمائل",
+    "هدي النبي",
+    "المصطفي",
+    "الصحابه",
+    "الصحابي",
+    "رضي الله عنه",
+    "رضي الله عنهما",
+    "ابي بكر",
+    "ابو بكر",
+    "سلمان",
+    "ابي الدرداء",
+    "فاطمه",
+    "خديجه",
+    "بيت النبوه",
+    "سيره",
+    "رسول الله",
+    "صلوا علي النبي"
+   ]
+  },
+  {
+   "id": "ulama",
+   "title": "العلماء وطلب العلم",
+   "words": [
+    "العلماء",
+    "الالباني",
+    "ابن باز",
+    "ابن تيميه",
+    "طلب العلم",
+    "طلاب العلم",
+    "التفقه",
+    "الكتب",
+    "كتب",
+    "الامام احمد",
+    "الشافعي",
+    "شيخ الاسلام",
+    "مجالس السماع",
+    "التعلم",
+    "العالم",
+    "علماء"
+   ]
+  },
+  {
+   "id": "family",
+   "title": "الأسرة والمرأة",
+   "words": [
+    "الزوجين",
+    "الزوج",
+    "الزوجه",
+    "المراه",
+    "النسويه",
+    "الذكوريه",
+    "اولادنا",
+    "الاولاد",
+    "الوالدين",
+    "الاسره",
+    "الجار",
+    "الارحام",
+    "النكاح",
+    "الزواج",
+    "الاحفاد",
+    "اسري"
+   ]
+  },
+  {
+   "id": "dawah",
+   "title": "الدعوة والمهتدون",
+   "words": [
+    "اسلامه",
+    "اسلم",
+    "دخل في الاسلام",
+    "النصرانيه",
+    "المهتدين",
+    "الالحاد الي",
+    "new muslim",
+    "revert",
+    "الدعوه",
+    "داعيه",
+    "الداخلين في الاسلام",
+    "المستقبل للاسلام",
+    "فهل انتم مسلمون"
+   ]
+  },
+  {
+   "id": "modern",
+   "title": "قضايا معاصرة",
+   "words": [
+    "كورونا",
+    "الوباء",
+    "الذكاء الصناعي",
+    "الاقتصادي",
+    "الطب",
+    "التطعيم",
+    "اللقاح",
+    "الجوال",
+    "ارطغرل",
+    "شارلي",
+    "الحريات",
+    "الشذوذ",
+    "المثليه",
+    "المذياع",
+    "التلفاز"
+   ]
+  },
+  {
+   "id": "kawn",
+   "title": "التفكر في آيات الله",
+   "words": [
+    "خلق",
+    "الجبال",
+    "بحيره",
+    "الابل",
+    "الاشجار",
+    "التفكر",
+    "الكون",
+    "المطر",
+    "البحر",
+    "الطبيعه"
+   ]
+  },
+  {
+   "id": "fiqh",
+   "title": "الفقه والأحكام",
+   "words": [
+    "حكم",
+    "احكام",
+    "الفقه",
+    "الفتوي",
+    "فتوي",
+    "اكل",
+    "لحم",
+    "الجلاله",
+    "مباح",
+    "يجوز",
+    "الاعتصامات",
+    "الاضرابات",
+    "حقوق شرعيه",
+    "الطائره",
+    "السائقي",
+    "مذهب"
+   ]
+  },
+  {
+   "id": "akhlaq",
+   "title": "الأخلاق والرقائق",
+   "words": [
+    "الاخلاق",
+    "اداب",
+    "الادب",
+    "الصبر",
+    "الشكر",
+    "شكرا",
+    "التوبه",
+    "الدعاء",
+    "الذكر",
+    "السعاده",
+    "الرحمه",
+    "الاخلاص",
+    "القلوب",
+    "الموت",
+    "الاخره",
+    "الجنه",
+    "النار",
+    "نصيحه",
+    "همسه",
+    "همسات",
+    "العافيه",
+    "التقوي",
+    "الاستقامه",
+    "البخل",
+    "الكرم",
+    "الصدقه",
+    "الوالدان",
+    "الوالدين",
+    "قدوه",
+    "الرزق",
+    "التنافس",
+    "الجليس",
+    "الشهوات",
+    "النفس",
+    "المزاح",
+    "الحب",
+    "الاخوه",
+    "الوحده",
+    "الامر بالمعروف",
+    "الاستجابه",
+    "دعوت",
+    "احتسابا",
+    "العمل",
+    "دعوات",
+    "شره"
+   ]
+  }
+ ],
+ "topic_english": {
+  "id": "langs",
+  "title": "بلغات أخرى"
+ },
+ "topic_other": {
+  "id": "other",
+  "title": "متفرقات"
+ },
+ "external": {
+  "_note": "دروس الشيخ ومحاضراته في قنوات أخرى. يُقبل المقطع إن كان اسم الشيخ في عنوانه (name_pattern) ولم يكن عنه (about_patterns). ويظهر إن كانت مدته min_minutes دقيقة فأكثر، أو كان ضمن قائمة من playlists. المكرر مع قناة الشيخ يُتجاهل تلقائيًا.",
+  "name_pattern": "عاصم\\s*(?:بن\\s*عبد\\s*الله\\s*)?(?:بن\\s*إبراهيم\\s*)?(?:ال)?قريوت[يى]|A+s[ie]+m\\b.{0,25}Qar[iy]?o+u?ti|Qaryooti|Qariuti|Qarioti|Qaryouti|Qaryoti",
+  "about_patterns": [
+   "هل الشيخ عاصم",
+   "عن الشيخ عاصم",
+   "مؤلفات الشيخ",
+   "إجازة",
+   "إجازةشيخنا",
+   "🎙",
+   "&",
+   "\\bna\\s+Sh",
+   " والأستاذ",
+   "والشيخ",
+   "الجوابرة",
+   "\\band\\s+(?:Sh|Ust)"
+  ],
+  "min_minutes": 15,
+  "exclude_channels": [
+   "alqaryoti",
+   "aljohni1",
+   "MAHADSUNNAH",
+   "saedtubasi"
+  ],
+  "playlists": [
+   {
+    "id": "PLtoKkuIsBihBwEzhd-cYmstGQlXxYahrU",
+    "t": "شرح ثلاثيات صحيح الإمام البخاري",
+    "src": "كنوز العلم"
+   },
+   {
+    "id": "PLtoKkuIsBihBoZqLjGcSlcVsgJdKM4Qng",
+    "t": "شرح كتاب الصيام من موطأ الإمام مالك",
+    "src": "كنوز العلم"
+   },
+   {
+    "id": "PLsvOdg3yVjd-GE5SHZfqFPiTPUa_sFDb3",
+    "t": "فضيلة الشيخ أ. د. عاصم بن عبدالله القريوتي",
+    "src": "مركز الإمام الألباني"
+   }
+  ],
+  "channels": [
+   "Lights-of-hope",
+   "webkalelm",
+   "AlalbanyCenter"
+  ],
+  "queries": [
+   "عاصم القريوتي",
+   "الشيخ عاصم القريوتي",
+   "عاصم بن عبدالله القريوتي",
+   "عاصم القريوتي محاضرة",
+   "عاصم القريوتي شرح",
+   "عاصم القريوتي درس",
+   "Asim Al-Qaryooti",
+   "Assim Al Qaryooti"
+  ]
+ }
 }
