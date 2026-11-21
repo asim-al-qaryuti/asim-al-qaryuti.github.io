@@ -80,7 +80,7 @@ const series = (list, kind) => (list || []).map(s => {
 }).filter(s => s.lessons.length);
 /* شروح الكتب المرئية والدورات: سلاسل دروس تظهر في «البرامج»؛ أما «الكتب» فمؤلفات الشيخ نفسه (S.works) */
 const SHUROH = series([...(S.books || []), ...ytSeries("book")], "program").map(s => ({ ...s, sharh: true })).sort((a, b) => b.lessons.length - a.lessons.length);
-const WTYPES = ["تأليف", "تحقيق", "بحث محكّم", "مراجعة وتعليق"];
+const WTYPES = ["تأليف", "بحث محكّم", "تحقيق", "تقديم ومراجعة"];
 const BOOKS = (S.works || []).map((w, i) => typeof w === "string" ? { id: "w" + (i + 1), title: w, type: "تأليف" } : { id: w.id || "w" + (i + 1), type: "تأليف", ...w });
 const COURSES = [];   // الدورات صارت ضمن البرامج
 const PROGS = series([...ytSeries("program"), ...(S.courses || []), ...ytSeries("course")], "program").sort((a, b) => (b._last || 0) - (a._last || 0));
@@ -260,7 +260,7 @@ function bootCV() {
 function viewBooks() {
   const types = WTYPES.filter(t => BOOKS.some(b => b.type === t));
   const st = { t: "all" };
-  V(`${pageHead("الكتب", `مؤلفات الشيخ وتحقيقاته وبحوثه المحكّمة (${arN(BOOKS.length)}). أما شروحه المرئية للكتب ففي <a href="#/programs">البرامج</a>.`)}
+  V(`${pageHead("الكتب", `مؤلفات الشيخ وبحوثه المحكّمة وتحقيقاته، وما قدّم له وراجعه من كتب (${arN(BOOKS.length)}). أما شروحه المرئية للكتب ففي <a href="#/programs">البرامج</a>.`)}
   <div class="wrap page">
     ${types.length > 1 ? `<div class="pills" id="wt" style="margin-bottom:22px"><button class="pill" type="button" data-t="all" aria-pressed="true">الكل <span class="n">${arN(BOOKS.length)}</span></button>${types.map(t => `<button class="pill" type="button" data-t="${esc(t)}" aria-pressed="false">${esc(t)} <span class="n">${arN(BOOKS.filter(b => b.type === t).length)}</span></button>`).join("")}</div>` : ""}
     <ol class="works-l" id="lst"></ol>
