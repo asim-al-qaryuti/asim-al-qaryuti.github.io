@@ -246,7 +246,7 @@ function bootCV() {
     if (!ents.some(e => e.isIntersecting)) return;
     io.disconnect();
     try {
-      const mod = await import("./cv3d.js?v=9");
+      const mod = await import("./cv3d.js?v=10");
       if (destroyed) return;
       handle = await mod.mountCV(root, cv, { reduced });
       if (destroyed) handle?.destroy(); else if (!handle) cvFallback(root, cv);
@@ -270,10 +270,21 @@ function viewBooks() {
     $("#lst").innerHTML = BOOKS.filter(b => st.t === "all" || b.type === st.t).map(b => `<li class="work">
       <span class="wk-ic">${ico("book")}</span>
       <div class="wk-b"><span class="wk-t">${esc(b.title)}</span><span class="wk-m"><span class="wk-type">${esc(b.type)}</span>${b.note ? `<span>${esc(b.note)}</span>` : ""}</span></div>
-      ${b.href ? `<a class="btn" href="${esc(b.href)}" target="_blank" rel="noopener">${ico("link")}<span>اقرأه</span></a>` : ""}</li>`).join("");
+      ${b.pdf ? `<a class="btn" href="#/read/${esc(b.id)}">${ico("file")}<span>اقرأه</span></a>` : ""}</li>`).join("");
   };
   $("#wt")?.addEventListener("click", e => { const b = e.target.closest("[data-t]"); if (b) { st.t = b.dataset.t; draw(); } });
   draw();
+}
+
+/* ---------- read a book (PDF inside the site) ---------- */
+function viewRead(id) {
+  const b = BOOKS.find(x => x.id === id);
+  if (!b || !b.pdf) return viewNotFound();
+  V(`${pageHead(b.title, `<span style="color:var(--acc)">${esc(b.type)}</span>${b.note ? " · " + esc(b.note) : ""}`, [["#/books", "الكتب"]])}
+  <div class="wrap page">
+    <div class="reader"><iframe src="${esc(b.pdf)}#view=FitH" title="${esc(b.title)}"></iframe></div>
+    <p style="margin-top:12px"><a class="btn" href="${esc(b.pdf)}" download>${ico("file")}<span>تنزيل الكتاب</span></a></p>
+  </div>`);
 }
 
 /* ---------- book / course page ---------- */
@@ -501,7 +512,7 @@ const NAV = [
   ...(POSTS.length ? [["#/blog", "المقالات", "blog"]] : []),
   ["#/more", "المزيد", "more"]
 ];
-const NAV_OF = { topics: "more", topic: "more", book: "books", course: "courses", program: "programs", post: "blog", archive: "more", search: "" };
+const NAV_OF = { read: "books", topics: "more", topic: "more", book: "books", course: "courses", program: "programs", post: "blog", archive: "more", search: "" };
 function chrome() {
   const LOGO = `<span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#2E5E4E"/><rect x="13" y="17" width="10" height="31" rx="2" fill="#F2ECE1"/><rect x="26" y="12" width="11" height="36" rx="2" fill="#F2ECE1"/><rect x="40" y="20" width="10" height="28" rx="2" fill="#F2ECE1" opacity=".82"/><path d="M13 24h10M26 19h11M26 42h11M40 27h10" stroke="#2E5E4E" stroke-width="2"/><rect x="10" y="49" width="44" height="4" rx="2" fill="#F2ECE1"/></svg></span>`;
   $("#brand").innerHTML = `${LOGO}<span>${esc(S.short || S.brand || "")}</span>`;
@@ -535,6 +546,7 @@ function route() {
   switch (key) {
     case "home": viewHome(); break;
     case "books": viewBooks(); title = "الكتب"; break;
+    case "read": viewRead(arg); title = BOOKS.find(x => x.id === arg)?.title; break;
     case "book": case "course": location.replace("#/program/" + encodeURIComponent(arg)); return;   // old links
     case "program": viewSeries(arg); title = SERIES[arg]?.title; break;
     case "programs": viewPrograms(); title = "البرامج"; break;
