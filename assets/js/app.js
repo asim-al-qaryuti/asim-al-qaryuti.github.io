@@ -81,7 +81,8 @@ const series = (list, kind) => (list || []).map(s => {
 /* شروح الكتب المرئية والدورات: سلاسل دروس تظهر في «البرامج»؛ أما «الكتب» فمؤلفات الشيخ نفسه (S.works) */
 const SHUROH = series([...(S.books || []), ...ytSeries("book")], "program").map(s => ({ ...s, sharh: true })).sort((a, b) => b.lessons.length - a.lessons.length);
 const WTYPES = ["تأليف", "بحث محكّم", "تحقيق", "تقديم ومراجعة"];
-const BOOKS = (S.works || []).map((w, i) => typeof w === "string" ? { id: "w" + (i + 1), title: w, type: "تأليف" } : { id: w.id || "w" + (i + 1), type: "تأليف", ...w });
+/* ملف الكتاب في href (مسار داخل المستودع أو رابط كامل، مثل Cloudflare R2)؛ و pdf اسمه القديم */
+const BOOKS = (S.works || []).map((w, i) => typeof w === "string" ? { id: "w" + (i + 1), title: w, type: "تأليف" } : { id: w.id || "w" + (i + 1), type: "تأليف", ...w, file: w.href || w.pdf || "" });
 const COURSES = [];   // الدورات صارت ضمن البرامج
 const PROGS = series([...ytSeries("program"), ...(S.courses || []), ...ytSeries("course")], "program").sort((a, b) => (b._last || 0) - (a._last || 0));
 const PROGRAMS = [...SHUROH, ...PROGS];
@@ -270,7 +271,7 @@ function viewBooks() {
     $("#lst").innerHTML = BOOKS.filter(b => st.t === "all" || b.type === st.t).map(b => `<li class="work">
       <span class="wk-ic">${ico("book")}</span>
       <div class="wk-b"><span class="wk-t">${esc(b.title)}</span><span class="wk-m"><span class="wk-type">${esc(b.type)}</span>${b.note ? `<span>${esc(b.note)}</span>` : ""}</span></div>
-      ${b.pdf ? `<a class="btn" href="#/read/${esc(b.id)}">${ico("file")}<span>اقرأه</span></a>` : ""}</li>`).join("");
+      ${b.file ? `<a class="btn" href="#/read/${esc(b.id)}">${ico("file")}<span>اقرأه</span></a>` : ""}</li>`).join("");
   };
   $("#wt")?.addEventListener("click", e => { const b = e.target.closest("[data-t]"); if (b) { st.t = b.dataset.t; draw(); } });
   draw();
@@ -279,11 +280,11 @@ function viewBooks() {
 /* ---------- read a book (PDF inside the site) ---------- */
 function viewRead(id) {
   const b = BOOKS.find(x => x.id === id);
-  if (!b || !b.pdf) return viewNotFound();
+  if (!b || !b.file) return viewNotFound();
   V(`${pageHead(b.title, `<span style="color:var(--acc)">${esc(b.type)}</span>${b.note ? " · " + esc(b.note) : ""}`, [["#/books", "الكتب"]])}
   <div class="wrap page">
-    <div class="reader"><iframe src="${esc(b.pdf)}#view=FitH" title="${esc(b.title)}"></iframe></div>
-    <p style="margin-top:12px"><a class="btn" href="${esc(b.pdf)}" download>${ico("file")}<span>تنزيل الكتاب</span></a></p>
+    <div class="reader"><iframe src="${esc(b.file)}#view=FitH" title="${esc(b.title)}"></iframe></div>
+    <p style="margin-top:12px"><a class="btn" href="${esc(b.file)}" download>${ico("file")}<span>تنزيل الكتاب</span></a></p>
   </div>`);
 }
 
