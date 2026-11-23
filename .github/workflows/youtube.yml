@@ -1,5 +1,5 @@
-# يجلب المقاطع الجديدة من قناة الشيخ كل 6 ساعات، ويحدّث الموقع ثم ينشره.
-# يعمل أيضًا عند كل رفع للملفات، ويمكن تشغيله يدويًا من تبويب Actions.
+# يجلب المقاطع الجديدة من قناة الشيخ كل 6 ساعات، ويولّد ملفات JSON لتطبيق الجوال، ثم ينشر الموقع.
+# يعمل أيضًا عند كل رفع للملفات (فأي تعديل على content.js أو articles.js يحدّث JSON)، ويمكن تشغيله يدويًا من تبويب Actions.
 name: تحديث يوتيوب ونشر الموقع
 
 on:
@@ -35,13 +35,22 @@ jobs:
         run: python3 tools/update_youtube.py
         continue-on-error: true
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # إن كان في البيانات خطأ (ملف معطوب، معرّف مكرر، ملف كتاب مفقود) يتوقف هنا فلا يُنشر شيء، ويبقى الموقع الحالي
+      - name: توليد ملفات JSON لتطبيق الجوال
+        run: node tools/build_json.mjs
+
       - name: حفظ التحديث في المستودع
         run: |
-          if ! git diff --quiet -- data/youtube.js; then
+          git add data/youtube.js data/json
+          if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/youtube.js
-            git commit -m "تحديث مقاطع يوتيوب"
+            git commit -m "تحديث تلقائي: مقاطع يوتيوب وملفات JSON"
+            git pull --rebase origin main
             git push
           fi
 
