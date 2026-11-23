@@ -1,0 +1,653 @@
+{
+  "schema": 1,
+  "site": {
+    "name": "مكتبة الشيخ عاصم القريوتي",
+    "short_name": "مكتبة القريوتي",
+    "base_url": "https://asim-al-qaryuti.github.io",
+    "footer": "جميع المواد متاحة للنشر بشرط عدم التغيير."
+  },
+  "person": {
+    "pre": "فضيلة الشيخ الأستاذ الدكتور",
+    "name": "عاصم بن عبدالله القريوتي",
+    "cred": "أستاذ السنة النبوية وعلومها بجامعة الإمام محمد بن سعود الإسلامية سابقًا",
+    "role": "من تلاميذ العلامة الألباني والعلامة ابن باز رحمهما الله",
+    "lede": "شروحه للكتب وبرامجه ومحاضراته وخطبه، مجموعةً ومرتبةً في مكان واحد.",
+    "photo": null
+  },
+  "about": [
+    "الأستاذ الدكتور أبو صهيب عاصم بن عبدالله بن إبراهيم القريوتي، أستاذ السنة النبوية وعلومها بجامعة الإمام محمد بن سعود الإسلامية بالرياض سابقًا. وُلد في الزرقاء بالأردن عام ١٣٧٤ هـ، والتحق بالجامعة الإسلامية بالمدينة النبوية سنة ١٣٩٣ هـ، وتتلمذ على كبار علماء العصر، كالعلامة الألباني والعلامة ابن باز رحمهما الله.",
+    "تجمع هذه المكتبة شروحه وبرامجه ومحاضراته وخطبه المنشورة على قناته في يوتيوب، مرتبةً حسب الكتب والبرامج والمواضيع، وتُضاف إليها المقاطع الجديدة تلقائيًا."
+  ],
+  "cv": [
+    {
+      "year": "١٣٧٤ هـ",
+      "title": "المولد",
+      "place": "الزرقاء — الأردن",
+      "text": "أبو صهيب عاصم بن عبدالله بن إبراهيم بن خليل بن مصطفى آل مُعمَّر القَرْيُوتي، الأردني، وقَرْيُوت بلدة من قضاء نابلس بفلسطين. وُلد في الزرقاء بالأردن سنة ١٣٧٤ هـ (١٩٥٤م).",
+      "image": null,
+      "links": []
+    },
+    {
+      "year": "الثانوية",
+      "title": "بداية الطلب",
+      "place": "الأردن",
+      "text": "طلب العلم وهو في المرحلة الثانوية، بتعرّفه على شيخه العلامة محمد ناصر الدين الألباني ولقائه به، وبمطالعة كتبه رحمه الله.",
+      "image": null,
+      "links": []
+    },
+    {
+      "year": "١٣٩٣ هـ",
+      "title": "في المدينة النبوية",
+      "place": "الجامعة الإسلامية — كلية الشريعة",
+      "text": "التحق بالجامعة الإسلامية بالمدينة النبوية سنة ١٣٩٣ هـ، بسعي من شيخيه محمد ناصر الدين الألباني ومحمد زهير الشاويش، والمفتي محمد أمين الحسيني رحمهم الله. ودرس في كلية الشريعة وكانت سنته الأخيرة فيها ١٣٩٦–١٣٩٧ هـ، وقرأ القرآن على الشيخ عبدالفتاح القاضي رحمه الله.",
+      "image": null,
+      "links": [
+        {
+          "title": "طرفة مع أستاذ النحو أيام الطلب بالمدينة",
+          "type": "video",
+          "video_id": "0BQgaqYvGQE",
+          "youtube_url": "https://www.youtube.com/watch?v=0BQgaqYvGQE",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/0BQgaqYvGQE"
+        }
+      ]
+    },
+    {
+      "year": "مشايخه",
+      "title": "على أيدي العلماء",
+      "place": "المدينة النبوية والرياض",
+      "text": "لازم جمعًا من علماء المدينة النبوية ووارديها، ومن علماء باكستان والهند والمغرب العربي. ومن مشايخه: العلامة محمد ناصر الدين الألباني، والعلامة عبدالعزيز بن باز، والشيخ عبدالمحسن العباد، والشيخ عمر بن محمد فلاتة، والشيخ محمد الشاذلي النيفر. وله ذكريات مع الشيخ حماد الأنصاري والشيخ محمد يونس الجونفوري رحمهم الله. وشيوخه مذكورون بأسانيدهم في ثبته «إتحاف الراغبين».",
+      "image": null,
+      "links": [
+        {
+          "title": "ثبته «إتحاف الراغبين»",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/read/ithaf"
+        },
+        {
+          "title": "حديثي عن الإمام الألباني رحمه الله",
+          "type": "video",
+          "video_id": "zpgQPIG87z4",
+          "youtube_url": "https://www.youtube.com/watch?v=zpgQPIG87z4",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/zpgQPIG87z4"
+        },
+        {
+          "title": "الشيخ محمد يونس الجونفوري كما عرفته",
+          "type": "video",
+          "video_id": "L6YwPDD5mh8",
+          "youtube_url": "https://www.youtube.com/watch?v=L6YwPDD5mh8",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/L6YwPDD5mh8"
+        },
+        {
+          "title": "موقف مع الشيخ حماد الأنصاري",
+          "type": "video",
+          "video_id": "x4AXZvqJYi4",
+          "youtube_url": "https://www.youtube.com/watch?v=x4AXZvqJYi4",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/x4AXZvqJYi4"
+        },
+        {
+          "title": "إطلالة على الوصية الذهبية الألبانية",
+          "type": "video",
+          "video_id": "4JOPUx8dI4g",
+          "youtube_url": "https://www.youtube.com/watch?v=4JOPUx8dI4g",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/4JOPUx8dI4g"
+        }
+      ]
+    },
+    {
+      "year": "١٤٠٣ هـ",
+      "title": "الدكتوراه",
+      "place": "الحديث النبوي الشريف",
+      "text": "نال درجة الدكتوراه في الحديث النبوي سنة ١٤٠٣ هـ (١٩٨٣م)، وفيها بدأ التدريس بالجامعة الإسلامية.",
+      "image": null,
+      "links": []
+    },
+    {
+      "year": "الأستاذية",
+      "title": "أستاذ السنة النبوية",
+      "place": "باكستان · الأردن · المدينة النبوية · الرياض",
+      "text": "تنقّل في الأعمال الوظيفية بين باكستان والأردن، والمدينة النبوية بالجامعة الإسلامية، والرياض بجامعة الإمام محمد بن سعود الإسلامية، وبلغ فيها درجة الأستاذية، حتى انتهى التعاقد معها عام ١٤٤٥ هـ. واشتغل خلالها بالتدريس والتأليف والإشراف على الرسائل العلمية: أشرف على رسائل الماجستير والدكتوراه في علوم الحديث والتفسير والعقيدة والسيرة النبوية وناقشها، وحكّم أبحاثًا ورسائل كثيرة لجامعات مختلفة، وبحوثًا للترقية والمؤتمرات.",
+      "image": null,
+      "links": [
+        {
+          "title": "أضواء على البحث العلمي لدى العلامة الألباني",
+          "type": "video",
+          "video_id": "IIvpd9p7Vvc",
+          "youtube_url": "https://www.youtube.com/watch?v=IIvpd9p7Vvc",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/IIvpd9p7Vvc"
+        }
+      ]
+    },
+    {
+      "year": "العضويات",
+      "title": "في خدمة السنة",
+      "place": null,
+      "text": "عضو هيئة تحرير مجلة «سنن» المحكّمة، وعضو الجمعية العلمية السعودية للسنة وعلومها، وله مشاركات في الندوات والمحاضرات في عدة بلدان، وفي إذاعة القرآن الكريم، وله عدد من البحوث والمقالات في مجلات مختلفة.",
+      "image": null,
+      "links": []
+    },
+    {
+      "year": "التأليف",
+      "title": "البحث والتحقيق",
+      "place": null,
+      "text": "له أكثر من أربعين مؤلفًا وتحقيقًا وبحثًا، منها: «الإسناد من الدين»، و«تعظيم السنة النبوية ولزوم اتباعها»، و«كوكبة من أئمة الهدى ومصابيح الدجى»، وتحقيق «قطف الثمر» و«تعريف أهل التقديس» لابن حجر.",
+      "image": null,
+      "links": [
+        {
+          "title": "كل مؤلفاته وتحقيقاته",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/books"
+        },
+        {
+          "title": "معالم الرحمة لدى شيخنا الألباني (مؤتمر نبي الرحمة بالرياض)",
+          "type": "video",
+          "video_id": "Uva-FZvCPh8",
+          "youtube_url": "https://www.youtube.com/watch?v=Uva-FZvCPh8",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/Uva-FZvCPh8"
+        }
+      ]
+    },
+    {
+      "year": "١٤٣٠ هـ",
+      "title": "دورات مركز الإمام الألباني",
+      "place": "الأردن",
+      "text": "ألقى محاضرات «في رحاب العلم والعلماء» في الدورة الحادية عشرة بمركز الإمام الألباني للدراسات المنهجية والأبحاث العلمية (شعبان ١٤٣٠ هـ)، و«خصائص السلفية» في الدورة السادسة عشرة.",
+      "image": null,
+      "links": [
+        {
+          "title": "في رحاب العلم والعلماء",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/program/rihab-ilm"
+        },
+        {
+          "title": "خصائص السلفية",
+          "type": "video",
+          "video_id": "RJ3S-uawE1s",
+          "youtube_url": "https://www.youtube.com/watch?v=RJ3S-uawE1s",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/RJ3S-uawE1s"
+        }
+      ]
+    },
+    {
+      "year": "الدعوة",
+      "title": "في البلدان",
+      "place": "أكثر من ثلاثين دولة",
+      "text": "رحل إلى أكثر من ثلاثين دولة للتعرّف على إخوانه هناك ومعرفة أحوالهم، وشارك بالدروس والدورات والخطب في الكويت وإندونيسيا وبريطانيا، وفي الدعوة إلى الله في أوغندا ومالاوي وغيرهما من بلاد أفريقيا.",
+      "image": null,
+      "links": [
+        {
+          "title": "خطبة جمعة بالكويت",
+          "type": "video",
+          "video_id": "D_cptqSvg8Y",
+          "youtube_url": "https://www.youtube.com/watch?v=D_cptqSvg8Y",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/D_cptqSvg8Y"
+        },
+        {
+          "title": "شرح حديث الرحمة المسلسل بالأولية — دورة إندونيسيا",
+          "type": "video",
+          "video_id": "8_7GHzlfGpo",
+          "youtube_url": "https://www.youtube.com/watch?v=8_7GHzlfGpo",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/8_7GHzlfGpo"
+        },
+        {
+          "title": "خطبة الجمعة بمسجد السنة في برستن ببريطانيا",
+          "type": "video",
+          "video_id": "JQHbBp2dFgk",
+          "youtube_url": "https://www.youtube.com/watch?v=JQHbBp2dFgk",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/JQHbBp2dFgk"
+        },
+        {
+          "title": "من الدعوة في أوغندا",
+          "type": "video",
+          "video_id": "v1j2nauxOp0",
+          "youtube_url": "https://www.youtube.com/watch?v=v1j2nauxOp0",
+          "url": "https://asim-al-qaryuti.github.io/#/lesson/v1j2nauxOp0"
+        }
+      ]
+    },
+    {
+      "year": "١٤٣٢ هـ",
+      "title": "نشر العلم",
+      "place": "يوتيوب والتيليجرام",
+      "text": "بدأ نشر دروسه على قناته في يوتيوب عام ١٤٣٢ هـ (٢٠١١م)، ومن برامجه: آية وتدبر، وحديث وفوائد، وفي بيت النبوة، مع شرح رياض الصالحين.",
+      "image": null,
+      "links": [
+        {
+          "title": "شرح رياض الصالحين",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/program/riyad"
+        },
+        {
+          "title": "برنامج آية وتدبر",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/program/aya"
+        },
+        {
+          "title": "كل البرامج",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/programs"
+        }
+      ]
+    },
+    {
+      "year": "اليوم",
+      "title": "مستمر في العطاء",
+      "place": null,
+      "text": "من دروسه الحالية: شرح رسالة في الحث على اجتماع كلمة المسلمين وذم التفرق والاختلاف، وشرح الأربعين في الأحكام للحافظ المنذري.",
+      "image": null,
+      "links": [
+        {
+          "title": "رسالة في الحث على اجتماع كلمة المسلمين",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/program/ijtima"
+        },
+        {
+          "title": "شرح الأربعين في الأحكام",
+          "type": "page",
+          "url": "https://asim-al-qaryuti.github.io/#/program/arbaun-ahkam"
+        }
+      ]
+    }
+  ],
+  "book_types": [
+    "تأليف",
+    "بحث محكّم",
+    "تحقيق",
+    "تقديم ومراجعة"
+  ],
+  "books": [
+    {
+      "id": "w1",
+      "title": "الإسناد من الدين ومن خصائص أمة سيد المرسلين ﷺ",
+      "type": "تأليف",
+      "note": "بحث تأصيلي في مكانة الإسناد وخصائصه في الأمة",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w2",
+      "title": "تعظيم السنة النبوية ولزوم اتباعها",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w3",
+      "title": "وجوب التثبت في الرواية",
+      "type": "تأليف",
+      "note": "في منهج التثبت عند المحدثين",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w4",
+      "title": "دراسة تحليلية لأحاديث نبوية",
+      "type": "تأليف",
+      "note": "أحد عشر حديثًا — تطبيقات عملية في دراسة الأحاديث",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w5",
+      "title": "شرح قصيدة الحافظ أبي محمود المقدسي في المدلسين",
+      "type": "تأليف",
+      "note": "شرح منظومة حديثية في باب التدليس",
+      "href": "https://asim-al-qaryuti.github.io/books/maqdisi-mudallisin.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w5"
+    },
+    {
+      "id": "w6",
+      "title": "تصحيح حديث البراء بن عازب في رد الروح إلى الجسد عند سؤال الملكين والرد على من ضعّفه",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w7",
+      "title": "التحذير من حديث موضوع في عقوبة تارك الصلاة",
+      "type": "تأليف",
+      "note": "في بيان وضع حديث مشهور",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w8",
+      "title": "كوكبة من أئمة الهدى ومصابيح الدجى",
+      "type": "تأليف",
+      "note": "في التراجم والرواية: تراجم ستة من علماء العصر: الجوندلوي، وعطاء الله حنيف البوجياني، وحماد الأنصاري، وعمر فلاتة، وابن باز، والألباني رحمهم الله",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w9",
+      "title": "سوانح عطرة من سيرة ناصر الدين والسنة المطهرة",
+      "type": "تأليف",
+      "note": "سيرة الإمام المجدد محمد ناصر الدين الألباني وآثاره العلمية، في سبعة أبواب",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "ithaf",
+      "title": "إتحاف الراغبين بوصل الأسانيد إلى سيد الأنبياء والمرسلين وكتب الأثبات والأعلام والمحققين",
+      "type": "تأليف",
+      "note": "ثبت الشيخ بأسانيده ومروياته عن شيوخه، وفي آخره نبذة من سيرته بقلمه — ١٤٤٨هـ",
+      "href": "https://asim-al-qaryuti.github.io/books/ithaf-alraghibin.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/ithaf"
+    },
+    {
+      "id": "w11",
+      "title": "المنتقى من حياة الصحابة",
+      "type": "تأليف",
+      "note": "بالاشتراك مع د. عبدالمنعم عطية",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w12",
+      "title": "الاعتصام بالكتاب والسنة وأثره في وحدة الأمة",
+      "type": "تأليف",
+      "note": "مكتبة التوعية الإسلامية",
+      "href": "https://asim-al-qaryuti.github.io/books/itisam.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w12"
+    },
+    {
+      "id": "w13",
+      "title": "جهالات خطيرة في قضايا اعتقادية كثيرة",
+      "type": "تأليف",
+      "note": "في تصحيح مفاهيم عقدية",
+      "href": "https://asim-al-qaryuti.github.io/books/jahalat.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w13"
+    },
+    {
+      "id": "w14",
+      "title": "كذبة إبريل (نيسان): أصلها التاريخي وحكمها الشرعي",
+      "type": "تأليف",
+      "note": "ويتضمن هدي السنة في المزاح",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w15",
+      "title": "أضواء على الحكمة في الدعوة إلى الله عز وجل",
+      "type": "تأليف",
+      "note": "في ضوابط الدعوة وأساليبها",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w16",
+      "title": "نداءات رب الناس لكافة الناس",
+      "type": "تأليف",
+      "note": "الآيات المبدوءة بـ«يا أيها الناس» في القرآن الكريم",
+      "href": "https://asim-al-qaryuti.github.io/books/nadaat.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w16"
+    },
+    {
+      "id": "w17",
+      "title": "محاسن دين الإسلام في صيغة سؤال وجواب",
+      "type": "تأليف",
+      "note": "مستفاد من كتاب «الدرة»",
+      "href": "https://asim-al-qaryuti.github.io/books/mahasin.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w17"
+    },
+    {
+      "id": "w18",
+      "title": "حديث الدعاء على من أكل بشماله: دراسة تحليلية",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w19",
+      "title": "علم الزوائد الحديثية وأهمية الاستدراكات فيه",
+      "type": "تأليف",
+      "note": "من خلال الاستدراكات على «موارد الظمآن إلى زوائد ابن حبان» أنموذجًا",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w20",
+      "title": "استدراكات العلامة الألباني على الحافظ الهيثمي في كتابه «موارد الظمآن إلى زوائد ابن حبان»",
+      "type": "تأليف",
+      "note": "عرض وتحليل ودراسة",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w21",
+      "title": "السلفية: مفهومها وأبرز خصائصها",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w22",
+      "title": "ضوابط مهمة في تحقيق لزوم جماعة المسلمين",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w23",
+      "title": "الغلو وأثره في زعزعة الأمن",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w24",
+      "title": "وسائل علاج ظاهرة التكفير",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w25",
+      "title": "الآثار الحميدة للوسطية على الفرد والأسرة والمجتمع",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w26",
+      "title": "أضواء شرعية على الإضرابات والاعتصامات للإصلاح والتغيير",
+      "type": "تأليف",
+      "note": "وآثارها السلبية على الفرد والمجتمع",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w27",
+      "title": "الحزبية وأبرز أسبابها",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w28",
+      "title": "واجب الأستاذ الجامعي في حماية الطلاب من الانحراف الفكري",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w29",
+      "title": "همسة في أذن العروسين",
+      "type": "تأليف",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w30",
+      "title": "الحديث التحليلي: دراسة تأصيلية تطبيقية",
+      "type": "بحث محكّم",
+      "note": "لمنهج تحليل الحديث النبوي رواية ودراية",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w31",
+      "title": "حديث صلاة الاستخارة دراية ورواية",
+      "type": "بحث محكّم",
+      "note": "جمع لطرق الحديث ودراسة لأسانيده وفقهه",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w32",
+      "title": "حديث النعمان بن بشير رضي الله عنه في تسوية الصفوف في الصلاة رواية ودراية",
+      "type": "بحث محكّم",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w33",
+      "title": "حقوق العلماء في السنة النبوية",
+      "type": "بحث محكّم",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w34",
+      "title": "تنبيهات على ما وقع في أسانيد منتقى الإمام ابن الجارود من سقط وتصحيفات",
+      "type": "بحث محكّم",
+      "note": null,
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w35",
+      "title": "منهج الإمام ابن الجارود النيسابوري في كتابه «المنتقى»",
+      "type": "بحث محكّم",
+      "note": "مجلة مركز المدينة للبحوث",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w36",
+      "title": "معالم الرحمة في دين الإسلام ونبيه ﷺ لدى العلامة الألباني",
+      "type": "بحث محكّم",
+      "note": "ضمن بحوث مؤتمر نبي الرحمة",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w37",
+      "title": "ضوابط ترجمة مصطلحات علوم السنة والسيرة النبوية",
+      "type": "بحث محكّم",
+      "note": "مع نماذج مما ورد منها في «معجم لغة الفقهاء» — ضمن بحوث ندوة ترجمة السنة والسيرة النبوية",
+      "href": "https://asim-al-qaryuti.github.io/books/dawabit-tarjama.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w37"
+    },
+    {
+      "id": "w38",
+      "title": "تعريف أهل التقديس بمراتب الموصوفين بالتدليس",
+      "type": "تحقيق",
+      "note": "للحافظ ابن حجر العسقلاني — مكتبة المنار، عمّان ١٤٠٣هـ",
+      "href": "https://asim-al-qaryuti.github.io/books/taarif-ahl-altaqdis.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w38"
+    },
+    {
+      "id": "w39",
+      "title": "قطف الثمر في بيان عقيدة أهل الأثر",
+      "type": "تحقيق",
+      "note": "لصديق حسن خان — على نسخة خطية",
+      "href": "https://asim-al-qaryuti.github.io/books/qatf-althamar.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w39"
+    },
+    {
+      "id": "w40",
+      "title": "الاتباع",
+      "type": "تحقيق",
+      "note": "لابن أبي العز الحنفي — بالاشتراك مع الشيخ محمد عطاء الله حنيف رحمه الله",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w41",
+      "title": "حكم الله الواحد الصمد في الطالب من غير الله المدد",
+      "type": "تحقيق",
+      "note": "للشيخ المعصومي — تخريج وتعليق",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w42",
+      "title": "شرح الروض المربع",
+      "type": "تحقيق",
+      "note": "لسماحة الشيخ عبدالله بن حميد رحمه الله — أشرف الشيخ على إخراجه وتحقيقه",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w43",
+      "title": "شرح السنة",
+      "type": "تقديم ومراجعة",
+      "note": "للإمام إسماعيل بن يحيى المزني — تقديم الشيخ",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w44",
+      "title": "فصل الخطاب في بيان عقيدة الشيخ محمد بن عبدالوهاب",
+      "type": "تقديم ومراجعة",
+      "note": "للدكتور أحمد بن عبدالكريم نجيب — تقديم ومراجعة وتعليق",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w45",
+      "title": "قرائن الترجيح في المحفوظ والشاذ وفي زيادة الثقة عند الحافظ ابن حجر في كتابه فتح الباري",
+      "type": "تقديم ومراجعة",
+      "note": "لنادر بن السنوسي العمراني — تقديم مشترك مع أ.د. أحمد معبد عبدالكريم",
+      "href": null,
+      "url": "https://asim-al-qaryuti.github.io/#/books"
+    },
+    {
+      "id": "w46",
+      "title": "الرؤى والأحلام: آداب وأحكام",
+      "type": "تقديم ومراجعة",
+      "note": "لأبي عبدالله خلدون حقوي — تقريظ الشيخ",
+      "href": "https://asim-al-qaryuti.github.io/books/ruaa.pdf",
+      "url": "https://asim-al-qaryuti.github.io/#/read/w46"
+    }
+  ],
+  "accounts": [
+    {
+      "label": "قناة الشيخ على يوتيوب",
+      "sub": "youtube.com/@alqaryoti",
+      "url": "https://www.youtube.com/@alqaryoti",
+      "icon": "video"
+    },
+    {
+      "label": "قناة الشيخ على تيليجرام",
+      "sub": "t.me/alqaryooti",
+      "url": "https://t.me/alqaryooti",
+      "icon": "send"
+    },
+    {
+      "label": "حساب الشيخ على إكس",
+      "sub": "x.com/alqaryooti",
+      "url": "https://twitter.com/alqaryooti",
+      "icon": "link"
+    },
+    {
+      "label": "صفحة الشيخ على فيسبوك",
+      "sub": "facebook.com/prof.alqaryooti",
+      "url": "https://www.facebook.com/prof.alqaryooti/",
+      "icon": "link"
+    }
+  ]
+}
