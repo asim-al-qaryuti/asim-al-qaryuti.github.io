@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "base_url": "https://asim-al-qaryuti.github.io",
-  "youtube_updated": "2026-11-24 09:54 UTC",
+  "youtube_updated": "2026-11-24 22:27 UTC",
   "files": {
     "content": {
       "url": "https://asim-al-qaryuti.github.io/data/json/content.json",
@@ -15,8 +15,8 @@
     },
     "youtube": {
       "url": "https://asim-al-qaryuti.github.io/data/json/youtube.json",
-      "sha256": "b23ea4ace60710a5d0620a3d4acc59e4fc9a7189006b94aeaa1404e923fce927",
-      "bytes": 451628
+      "sha256": "e6bdf785ce3ef2804a409fa720bc288754a30b1f87bb7c6f78dae305a907d2fd",
+      "bytes": 452867
     }
   }
 }
