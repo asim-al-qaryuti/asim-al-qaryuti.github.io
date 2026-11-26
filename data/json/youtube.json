@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-11-25 08:33 UTC",
+  "updated": "2026-11-26 08:17 UTC",
   "channel_url": "https://www.youtube.com/channel/UCZCnL_Vdd3Y0QpV5PhXwb4A",
   "categories": [
     {
@@ -381,10 +381,6 @@
         "ST7qdMd6WN8",
         "3s4JFa-xWc8",
         "Kv4-otXzFKA",
-        "_EXOaveat-g",
-        "pKDeXeMfkU4",
-        "l6xBKlo7-90",
-        "sGT2xihuA5k",
         "DoVeLVW2oe0",
         "SRYBWXj8w5g"
       ],
@@ -502,21 +498,6 @@
         "mR3WUOIvvgY"
       ],
       "url": "https://asim-al-qaryuti.github.io/#/program/hikam-quran"
-    },
-    {
-      "id": "anwar-sunna",
-      "kind": "program",
-      "title": "أنوار السنة",
-      "author": null,
-      "category": null,
-      "description": null,
-      "items": [
-        "kB24kk3Ev9w",
-        "mXinE-XfdEg",
-        "VLsE_V4_Ubg",
-        "X5gMpFoIz0o"
-      ],
-      "url": "https://asim-al-qaryuti.github.io/#/program/anwar-sunna"
     },
     {
       "id": "anwar-quran",
@@ -989,6 +970,10 @@
     "IDG-WCJDgDI",
     "AOVKJE-L70M",
     "JqitDPaN27M",
+    "sGT2xihuA5k",
+    "l6xBKlo7-90",
+    "pKDeXeMfkU4",
+    "_EXOaveat-g",
     "KG43uU86Ymo",
     "1ez4dU1tfEc",
     "gF-alc8Isok",
@@ -1006,6 +991,7 @@
     "hTofN9m_XjU",
     "LGMe-g9Jh4M",
     "nYhv_23aaGI",
+    "X5gMpFoIz0o",
     "JIWdAUmbXs4",
     "p6lO6P9MK68",
     "Rmj8SEhS-EQ",
@@ -1028,6 +1014,9 @@
     "Rqy-HdsZw1I",
     "Ztu9lRNCrwc",
     "VyvRLofHezY",
+    "VLsE_V4_Ubg",
+    "kB24kk3Ev9w",
+    "mXinE-XfdEg",
     "WiMZbbMaf28",
     "Eby9WKBkGFw",
     "VNxHKb66xyE",
@@ -5174,7 +5163,7 @@
       "short": false,
       "description": "برنامج (عبرة) الموسم الثاني\nقصص متنوعة مختارة ذات عبر، يُرجى بها النفع إن شاء الله\nالحلقة 4: معلم يؤثر في طلابه\nمع عاصم بن عبدالله القريوتي\nالكتاب المذكور: صفة صلاة النبي صلى الله عليه و سلم من التكبير إلى التسليم\nتصنيف: محمد ناصر الدين بن نوح نجاتي\nوهو الشيخ العلامة محمد ناصر الدين بن نوح نجاتي #الألباني (1332هـ - 1420هـ)\nإمام شهير، مجدد في علم الحديث، وذو مؤلفات عديدة تعد مرجعا للباحثين.",
       "channel": null,
-      "topic": null,
+      "topic": "ulama",
       "youtube_url": "https://www.youtube.com/watch?v=sGT2xihuA5k",
       "thumbnail": "https://i.ytimg.com/vi/sGT2xihuA5k/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/sGT2xihuA5k"
@@ -5200,7 +5189,7 @@
       "short": false,
       "description": "برنامج (عبرة) الموسم الثاني\nقصص متنوعة مختارة ذات عبر، يُرجى بها النفع إن شاء الله\nالحلقة 3: نقلة شاب من القصص والروايات البوليسية إلى الإمامة في الأحاديث النبوية\nمع عاصم بن عبدالله القريوتي\nالشيخ العلامة محمد ناصر الدين بن نوح نجاتي الألباني (1332هـ - 1420هـ)\nإمام شهير، مجدد في علم الحديث، وذو مؤلفات عديدة تعد مرجعا للباحثين.",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=l6xBKlo7-90",
       "thumbnail": "https://i.ytimg.com/vi/l6xBKlo7-90/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/l6xBKlo7-90"
@@ -5239,7 +5228,7 @@
       "short": false,
       "description": "برنامج (عبرة) الموسم الثاني\nقصص متنوعة مختارة ذات عبر، يُرجى بها النفع إن شاء الله\nالحلقة 2: صاحب القارب والعاطس\nمع عاصم بن عبدالله القريوتي\nأبو داود السجستاتي ( 202 هـ - 275 هـ ) سليمان بن الأشعث السجستاتي، الإمام الثبت، مصنف السنن.\nقال عنه ابن حبان: \"كان أحد أئمة الدنيا فقهًا وعلمًا وحفظًا ونسكًا وورعًا وإتقانًا، جمع وصنف وذبّ عن السنن\"",
       "channel": null,
-      "topic": null,
+      "topic": "other",
       "youtube_url": "https://www.youtube.com/watch?v=pKDeXeMfkU4",
       "thumbnail": "https://i.ytimg.com/vi/pKDeXeMfkU4/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/pKDeXeMfkU4"
@@ -5252,7 +5241,7 @@
       "short": false,
       "description": "برنامج (عبرة) الموسم الثاني\nقصص متنوعة مختارة ذات عبر، يُرجى بها النفع إن شاء الله\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "other",
       "youtube_url": "https://www.youtube.com/watch?v=_EXOaveat-g",
       "thumbnail": "https://i.ytimg.com/vi/_EXOaveat-g/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/_EXOaveat-g"
@@ -6149,7 +6138,7 @@
       "short": false,
       "description": null,
       "channel": null,
-      "topic": null,
+      "topic": "seasons",
       "youtube_url": "https://www.youtube.com/watch?v=X5gMpFoIz0o",
       "thumbnail": "https://i.ytimg.com/vi/X5gMpFoIz0o/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/X5gMpFoIz0o"
@@ -6539,7 +6528,7 @@
       "short": false,
       "description": "\"أنوار القرآن والسنّة\" برنامج يهدف إلى إلقاء الضوء والأنوار على هدايات القرآن والسنّة وإرشاداتهما  وبعض ما فيها من الفوائد والدروس.\nالحلقة 2\nأنوار السنة (تفسير القرآن بالسنة)\nعاصم بن عبدالله القريوتي\nحسابات البرنامج:\nتليقرام:",
       "channel": null,
-      "topic": null,
+      "topic": "quran",
       "youtube_url": "https://www.youtube.com/watch?v=kB24kk3Ev9w",
       "thumbnail": "https://i.ytimg.com/vi/kB24kk3Ev9w/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/kB24kk3Ev9w"
@@ -6552,7 +6541,7 @@
       "short": false,
       "description": "\"أنوار القرآن والسنّة\" برنامج يهدف إلى إلقاء الضوء والأنوار على هدايات القرآن والسنّة وإرشاداتهما  وبعض ما فيها من الفوائد والدروس.\nالحلقة 1\nأنوار السنة (تفسير القرآن بالسنة)\nعاصم بن عبدالله القريوتي\nحسابات البرنامج:\nتليقرام:",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=mXinE-XfdEg",
       "thumbnail": "https://i.ytimg.com/vi/mXinE-XfdEg/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/mXinE-XfdEg"
@@ -6565,7 +6554,7 @@
       "short": false,
       "description": "\"أنوار القرآن والسنّة\" برنامج يهدف إلى إلقاء الضوء والأنوار على هدايات القرآن والسنّة وإرشاداتهما  وبعض ما فيها من الفوائد والدروس.\nالحلقة 3\nأنوار السنة (الاحتساب والنية في الصوم)\nعاصم بن عبدالله القريوتي\nحسابات البرنامج للتواصل:\nتليقرام:",
       "channel": null,
-      "topic": null,
+      "topic": "ramadan",
       "youtube_url": "https://www.youtube.com/watch?v=VLsE_V4_Ubg",
       "thumbnail": "https://i.ytimg.com/vi/VLsE_V4_Ubg/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/VLsE_V4_Ubg"
