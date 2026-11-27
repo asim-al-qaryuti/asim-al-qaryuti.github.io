@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-11-26 21:32 UTC",
+  "updated": "2026-11-27 08:33 UTC",
   "channel_url": "https://www.youtube.com/channel/UCZCnL_Vdd3Y0QpV5PhXwb4A",
   "categories": [
     {
@@ -398,17 +398,6 @@
       "category": null,
       "description": null,
       "items": [
-        "NPOGLC6Wa8w",
-        "tMue-0RxDIU",
-        "fbMKeiMlWN8",
-        "9FSNLtinCac",
-        "PRPtF8vVc1E",
-        "P9AgR9wkisY",
-        "84cTQNjZ1eU",
-        "L1-P1CLFTi8",
-        "Ud8k6GEYiV0",
-        "ftAwSNYc0rE",
-        "6gCgArQepmc",
         "G3ul2GyilNY",
         "g9fqOKnsYqw",
         "udw4QCnlGuY",
@@ -647,6 +636,21 @@
         "6K7DDvaQZTA"
       ],
       "url": "https://asim-al-qaryuti.github.io/#/program/riyad-fawaid"
+    },
+    {
+      "id": "aya-fawaid",
+      "kind": "program",
+      "title": "فوائد من برنامج آية وتدبر",
+      "author": null,
+      "category": null,
+      "description": null,
+      "items": [
+        "qKX76kwCyEo",
+        "FH_qkt5ZODM",
+        "PpJ6SmY5HSM",
+        "2EVaTbVhv2U"
+      ],
+      "url": "https://asim-al-qaryuti.github.io/#/program/aya-fawaid"
     },
     {
       "id": "thulathiyat",
@@ -979,11 +983,22 @@
     "gF-alc8Isok",
     "Wh5olgMpHao",
     "1_M5iz_TBWQ",
+    "6gCgArQepmc",
+    "ftAwSNYc0rE",
+    "Ud8k6GEYiV0",
+    "L1-P1CLFTi8",
+    "84cTQNjZ1eU",
+    "P9AgR9wkisY",
+    "PRPtF8vVc1E",
     "PHhvlpr7iAQ",
     "8VCEcnHNobs",
     "jDk5EBIZJ6o",
+    "9FSNLtinCac",
     "3atRXgEHFZw",
     "tzmhLUrPhcQ",
+    "fbMKeiMlWN8",
+    "tMue-0RxDIU",
+    "NPOGLC6Wa8w",
     "ZY8-Yifqk-c",
     "kv6mQM4OP6c",
     "wQzP_NZPuAk",
@@ -1038,11 +1053,7 @@
     "0NyG6TZB1qs",
     "Caw0tKKTvQg",
     "pYTxJkozKjs",
-    "2EVaTbVhv2U",
-    "PpJ6SmY5HSM",
     "jLi8ZOl36ew",
-    "FH_qkt5ZODM",
-    "qKX76kwCyEo",
     "smw6QpHxDPw",
     "URC7cj-69qw",
     "Z7swaq7fwLY",
@@ -5527,7 +5538,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=6gCgArQepmc",
       "thumbnail": "https://i.ytimg.com/vi/6gCgArQepmc/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/6gCgArQepmc"
@@ -5553,7 +5564,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=ftAwSNYc0rE",
       "thumbnail": "https://i.ytimg.com/vi/ftAwSNYc0rE/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/ftAwSNYc0rE"
@@ -5592,7 +5603,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=Ud8k6GEYiV0",
       "thumbnail": "https://i.ytimg.com/vi/Ud8k6GEYiV0/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/Ud8k6GEYiV0"
@@ -5618,7 +5629,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=L1-P1CLFTi8",
       "thumbnail": "https://i.ytimg.com/vi/L1-P1CLFTi8/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/L1-P1CLFTi8"
@@ -5644,7 +5655,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=84cTQNjZ1eU",
       "thumbnail": "https://i.ytimg.com/vi/84cTQNjZ1eU/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/84cTQNjZ1eU"
@@ -5670,7 +5681,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=P9AgR9wkisY",
       "thumbnail": "https://i.ytimg.com/vi/P9AgR9wkisY/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/P9AgR9wkisY"
@@ -5696,7 +5707,7 @@
       "short": false,
       "description": "أحاديث قصيرة لنبي الهدى -صلى الله عليه وسلم- ذات دلالات عظمية من جوامع الكلم\nمع عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=PRPtF8vVc1E",
       "thumbnail": "https://i.ytimg.com/vi/PRPtF8vVc1E/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/PRPtF8vVc1E"
@@ -5761,7 +5772,7 @@
       "short": false,
       "description": "الأحاديث القصار 4 | متى تكون المصيبة خير لك\nعاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=9FSNLtinCac",
       "thumbnail": "https://i.ytimg.com/vi/9FSNLtinCac/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/9FSNLtinCac"
@@ -5917,7 +5928,7 @@
       "short": false,
       "description": "عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=fbMKeiMlWN8",
       "thumbnail": "https://i.ytimg.com/vi/fbMKeiMlWN8/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/fbMKeiMlWN8"
@@ -5956,7 +5967,7 @@
       "short": false,
       "description": "عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=NPOGLC6Wa8w",
       "thumbnail": "https://i.ytimg.com/vi/NPOGLC6Wa8w/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/NPOGLC6Wa8w"
@@ -5969,7 +5980,7 @@
       "short": false,
       "description": "عاصم بن عبدالله القريوتي",
       "channel": null,
-      "topic": null,
+      "topic": "sunnah",
       "youtube_url": "https://www.youtube.com/watch?v=tMue-0RxDIU",
       "thumbnail": "https://i.ytimg.com/vi/tMue-0RxDIU/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/tMue-0RxDIU"
@@ -7529,7 +7540,7 @@
       "short": false,
       "description": "فوائد مقتبسة من برنامج اية وتدبر\nرابط الحلقة كاملة:",
       "channel": null,
-      "topic": "other",
+      "topic": null,
       "youtube_url": "https://www.youtube.com/watch?v=2EVaTbVhv2U",
       "thumbnail": "https://i.ytimg.com/vi/2EVaTbVhv2U/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/2EVaTbVhv2U"
@@ -7555,7 +7566,7 @@
       "short": false,
       "description": "فوائد مقتبسة من برنامج اية وتدبر\nرابط الحلقة كاملة:",
       "channel": null,
-      "topic": "other",
+      "topic": null,
       "youtube_url": "https://www.youtube.com/watch?v=PpJ6SmY5HSM",
       "thumbnail": "https://i.ytimg.com/vi/PpJ6SmY5HSM/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/PpJ6SmY5HSM"
@@ -7633,7 +7644,7 @@
       "short": false,
       "description": "فوائد مقتبسة من برنامج اية وتدبر\nرابط الحلقة كاملة:",
       "channel": null,
-      "topic": "family",
+      "topic": null,
       "youtube_url": "https://www.youtube.com/watch?v=FH_qkt5ZODM",
       "thumbnail": "https://i.ytimg.com/vi/FH_qkt5ZODM/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/FH_qkt5ZODM"
@@ -7685,7 +7696,7 @@
       "short": false,
       "description": "فوائد مقتبسة من برنامج اية وتدبر\nرابط الحلقة كاملة:",
       "channel": null,
-      "topic": "other",
+      "topic": null,
       "youtube_url": "https://www.youtube.com/watch?v=qKX76kwCyEo",
       "thumbnail": "https://i.ytimg.com/vi/qKX76kwCyEo/hqdefault.jpg",
       "url": "https://asim-al-qaryuti.github.io/#/lesson/qKX76kwCyEo"
